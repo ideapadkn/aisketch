@@ -66,6 +66,8 @@ p{text-wrap:pretty}
 .btns{display:flex;align-items:center;gap:20px 32px;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;justify-content:center;font:500 16px/1.2 var(--sans);letter-spacing:.01em;text-decoration:none;text-align:center;border-radius:999px;padding:17px 32px;cursor:pointer;border:1px solid transparent;transition:background-color .4s var(--ease),border-color .4s var(--ease),color .4s var(--ease)}
 .btn-sm{padding:11px 22px;font-size:15px}
+.btn .ico{width:16px;height:16px;flex:none;margin-right:9px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+button.link{font:inherit;font-weight:500;color:inherit;background:none;border:0;border-bottom:1px solid var(--line);cursor:pointer}
 .btn-solid{background:var(--ivory);color:var(--ink)}
 .btn-solid:hover{background:var(--gold)}
 .btn-line{border-color:var(--line);background:none;color:var(--ivory)}
@@ -162,7 +164,8 @@ h2{font-size:clamp(40px,4.8vw,68px);line-height:1.02}
 .views{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);display:inline-flex;align-items:center;gap:7px;padding:7px 12px 7px 11px;border-radius:999px;background:rgba(6,13,38,.74);font:500 12px/1 var(--label);letter-spacing:.04em;white-space:nowrap}
 .views::before{content:"";border-style:solid;border-width:4.5px 0 4.5px 7px;border-color:transparent transparent transparent currentColor}
 .cap{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:16px}
-.cap em{font:italic 500 24px/1.1 var(--serif)}
+.cap em{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:.1em;font:italic 500 24px/1.1 var(--serif)}
+.cap small{flex:none}
 .cap small{font:500 10px/1 var(--label);letter-spacing:.18em;color:var(--muted)}
 .reels-cta{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:16px 32px;margin-top:48px}
 .reels-cta p{font-size:15px;color:var(--muted)}
@@ -273,6 +276,8 @@ legend.eyebrow{float:left;width:100%;padding:0;margin-bottom:12px}
 .chips label:hover span{color:var(--ivory)}
 .chips input:checked+span{color:var(--ivory);border-color:var(--gold);background:rgba(201,164,92,.12)}
 .chips input:focus-visible+span{outline:1px solid var(--gold);outline-offset:3px}
+.form-actions{display:flex;flex-wrap:wrap;align-items:center;gap:18px 28px}
+.contacts{display:flex;flex-wrap:wrap;gap:14px 28px}
 .note{margin-top:14px;font-size:14px;color:var(--muted)}
 
 footer{display:flex;flex-wrap:wrap;align-items:center;gap:20px 40px;padding:40px 0 calc(48px + env(safe-area-inset-bottom));font-size:15px;color:var(--muted)}
@@ -338,12 +343,13 @@ footer nav a:hover{color:var(--gold)}
       <a href="#raqamlar" data-i18n="nav_s">Raqamlar</a>
       <a href="#roliklar" data-i18n="nav_r">Roliklar</a>
       <a href="#qoshiq" data-i18n="nav_g">Qo'shiq</a>
+      <a href="#reklama" data-i18n="ad">Reklama</a>
     </nav>
     <div class="lang" role="group" aria-label="Til / Язык">
       <button type="button" data-set-lang="uz" aria-pressed="true">UZ</button>
       <button type="button" data-set-lang="ru" aria-pressed="false">RU</button>
     </div>
-    <a class="btn btn-solid btn-sm" href="#reklama" data-i18n="ad">Reklama</a>
+    <a class="btn btn-solid btn-sm" href="https://t.me/webfastuzb" target="_blank" rel="noopener" data-tg="hi"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg><span data-i18n="ad">Reklama</span></a>
   </div>
 </header>
 
@@ -355,7 +361,7 @@ footer nav a:hover{color:var(--gold)}
       <h1><span class="l in" data-i18n="h1a">O'zbekcha hayot,</span> <em class="l in" data-i18n="h1b">AI multfilmida</em></h1>
       <p class="lede in" data-tpl="hero">O'zbekiston hayotidan 3D sketchlar va ismga kulgili qo'shiqlar. Oxirgi 11&nbsp;kunda 3,5&nbsp;mln ko'rish&nbsp;— bu sahnada brendingizga ham joy bor.</p>
       <div class="btns in">
-        <a class="btn btn-solid" href="#reklama" data-i18n="btn_ad">Reklama joylashtirish</a>
+        <a class="btn btn-solid" href="https://t.me/webfastuzb" target="_blank" rel="noopener" data-tg="hi"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg><span data-i18n="btn_ad">Reklama joylashtirish</span></a>
         <a class="link" href="#qoshiq" data-i18n="btn_song">Ismimga qo'shiq</a>
       </div>
     </div>
@@ -485,7 +491,7 @@ footer nav a:hover{color:var(--gold)}
         </div>
         <div>
           <p class="lead" data-i18n="a_p">Mahsulotingizni sketch ichiga hazil bilan joylashtiramiz: reklama emas, voqeaning bir qismi. Bunday roliklarni oxirigacha ko'rishadi va do'stlarga yuborishadi.</p>
-          <div class="btns"><a class="btn btn-solid" href="#brif" data-i18n="a_btn">Ariza qoldirish</a></div>
+          <div class="btns"><a class="btn btn-solid" href="https://t.me/webfastuzb" target="_blank" rel="noopener" data-tg="hi"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg><span data-i18n="a_tg">Telegram'da yozish</span></a><a class="link" href="#brif" data-i18n="a_btn">Ariza qoldirish</a></div>
         </div>
       </div>
       <div class="story">
@@ -518,7 +524,7 @@ footer nav a:hover{color:var(--gold)}
           <h3 data-i18n="o_h">Sahifangiz uchun 3D multfilm-reklama</h3>
           <p data-i18n="o_p">Qahramonlarimiz brendingiz haqidagi alohida rolikda: o'zingizning Instagram, Telegram yoki YouTube sahifangiz uchun. Ssenariy, ovoz va montaj&nbsp;— bizdan.</p>
         </div>
-        <a class="btn btn-line" href="#brif" data-pick="own" data-i18n="o_btn">Narxini so'rash</a>
+        <a class="btn btn-line" href="https://t.me/webfastuzb" target="_blank" rel="noopener" data-tg="own"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg><span data-i18n="o_btn">Narxini so'rash</span></a>
       </div>
     </div>
   </div>
@@ -544,8 +550,8 @@ footer nav a:hover{color:var(--gold)}
     <div class="rv">
       <p class="eyebrow" data-i18n="q_e">Savollar</p>
       <h2 data-i18n="q_h">Ko'p so'raladigan savollar</h2>
-      <p class="lead" data-i18n="q_more">Boshqa savollar bo'lsa, direktga yozing.</p>
-      <a class="link" href="https://ig.me/m/aisketchuz" target="_blank" rel="noopener" data-i18n="q_dm">Direktga yozish</a>
+      <p class="lead" data-i18n="q_more">Boshqa savollar bo'lsa, Telegram'da yozing.</p>
+      <a class="link" href="https://t.me/webfastuzb" target="_blank" rel="noopener" data-tg="hi">@webfastuzb</a>
     </div>
     <div class="faq rv">
       <details><summary data-i18n="q1">Reklama qancha turadi?</summary><p data-i18n="qa1">Narx formatga, rolik davomiyligiga va qismlar soniga bog'liq. Ariza qoldiring&nbsp;— g'oya va aniq narx bilan javob beramiz.</p></details>
@@ -562,8 +568,11 @@ footer nav a:hover{color:var(--gold)}
     <div class="rv">
       <p class="eyebrow" data-i18n="b_e">Ariza</p>
       <h2 data-i18n="b_h">Brendingiz haqida yozing</h2>
-      <p class="lead" data-i18n="b_p">To'rtta maydon&nbsp;— va ariza matni tayyor. Uni Instagram direktga yuborasiz, biz esa g'oya va narx bilan javob beramiz.</p>
-      <a class="link" href="https://ig.me/m/aisketchuz" target="_blank" rel="noopener" data-i18n="b_dm">Yoki darhol direktga yozing</a>
+      <p class="lead" data-i18n="b_p">To'rtta maydon&nbsp;— va ariza Telegram'da tayyor bo'ladi. Biz g'oya va narx bilan javob beramiz.</p>
+      <div class="contacts">
+        <a class="link" href="https://t.me/webfastuzb" target="_blank" rel="noopener" data-tg="hi">Telegram @webfastuzb</a>
+        <a class="link" href="https://ig.me/m/aisketchuz" target="_blank" rel="noopener">Instagram @aisketchuz</a>
+      </div>
     </div>
     <form class="form panel rv" id="brief" novalidate>
       <div class="field">
@@ -588,8 +597,11 @@ footer nav a:hover{color:var(--gold)}
         <label class="eyebrow" for="bContact" data-i18n="b_contact">Aloqa</label>
         <input id="bContact" name="contact" type="text" maxlength="60" autocomplete="tel" required data-i18n-ph="b_contact_ph" placeholder="Telefon yoki Telegram">
       </div>
-      <button class="btn btn-solid" type="submit" data-i18n="b_send">Arizani yuborish</button>
-      <p class="note" data-i18n="b_note">Matn nusxalanadi va Instagram direkt ochiladi.</p>
+      <div class="form-actions">
+        <button class="btn btn-solid" type="submit"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg><span data-i18n="b_send">Telegram'da yuborish</span></button>
+        <button class="link" type="button" id="bIg" data-i18n="b_ig">Instagram orqali</button>
+      </div>
+      <p class="note" data-i18n="b_note">Telegram'da tayyor matn ochiladi&nbsp;— faqat yuborish qoladi.</p>
       <p class="status" id="bStatus" role="status"></p>
     </form>
   </div>
@@ -601,9 +613,9 @@ footer nav a:hover{color:var(--gold)}
   <footer>
     <a href="#" class="brand"><img src="assets/icon.jpg" alt="" width="34" height="34" loading="lazy">ai sketch</a>
     <nav aria-label="Aloqa">
-      <a href="https://instagram.com/aisketchuz" target="_blank" rel="noopener">@aisketchuz</a>
+      <a href="https://instagram.com/aisketchuz" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://t.me/webfastuzb" target="_blank" rel="noopener" data-tg="hi">Telegram</a>
       <a href="#reklama" data-i18n="ad">Reklama</a>
-      <a href="#brif" data-i18n="b_e">Ariza</a>
     </nav>
     <span>© 2026 aisketch.uz</span>
   </footer>
@@ -614,9 +626,9 @@ footer nav a:hover{color:var(--gold)}
     <div class="v-frame"><video id="vVideo" playsinline loop preload="none"></video><svg class="rim" viewBox="0 0 100 178" preserveAspectRatio="none" aria-hidden="true"><path d="M5 173V58C5 38 24 22 50 8C76 22 95 38 95 58V173Z"/></svg><span class="v-play"></span></div>
     <div class="v-bar"><i></i></div>
     <div class="v-cap">
-      <p class="eyebrow" data-i18n="f2_h">Ismga qo'shiq</p>
+      <p class="eyebrow" id="vMeta"></p>
       <h3 id="vName"></h3>
-      <a class="link" href="https://instagram.com/aisketchuz" target="_blank" rel="noopener" data-i18n="r_btn">Hammasini Instagram'da ko'rish</a>
+      <a class="link" id="vLink" href="https://instagram.com/aisketchuz" target="_blank" rel="noopener" data-i18n="v_open">Instagram'da ochish</a>
     </div>
   </div>
   <button class="v-x" type="button"><span aria-hidden="true">×</span><span class="sr" data-i18n="v_close">Yopish</span></button>
@@ -646,10 +658,9 @@ const T={uz:{},ru:{
   g_p:"Сайт сразу подберёт начало песни, вокалиста и стиль. Понравилось — отправьте в директ, лучшие станут роликами.",
   g_label:"На чьё имя?", g_ex:"Например:", g_empty:"Как только вы напишете имя, здесь появится песня.",
   g_send:"Заказать эту песню", g_next:"Другой вариант",
-  f2_h:"Песня на имя",
   a_h:"Пусть ваш бренд станет героем мультфильма",
   a_p:"Встроим продукт в скетч с юмором: не реклама, а часть истории. Такие ролики досматривают и пересылают друзьям.",
-  a_btn:"Оставить заявку",
+  a_btn:"Оставить заявку", a_tg:"Написать в Telegram",
   t1:"Ваш продукт", t2:"Название бренда в песне", t3a:"1-я серия", t3b:"2-я серия",
   sp1:"20–40 секунд", sp2:"10 секунд", sp3:"2+ серии",
   a1b:"Внутри сюжета.", a1:"Герои попадают в смешную ситуацию с вашим продуктом.",
@@ -663,18 +674,18 @@ const T={uz:{},ru:{
   j2h:"Идея и сценарий", j2:"Подбираем героев и шутку, пишем сценарий. Вы утверждаете.",
   j3h:"Ролик", j3:"Делаем 3D-ролик и показываем его вам до публикации.",
   j4h:"Публикация и отчёт", j4:"Выпускаем в @aisketchuz и присылаем статистику просмотров.",
-  q_e:"Вопросы", q_h:"Частые вопросы", q_more:"Если остались вопросы, напишите в директ.", q_dm:"Написать в директ",
+  q_e:"Вопросы", q_h:"Частые вопросы", q_more:"Если остались вопросы, напишите в Telegram.",
   q1:"Сколько стоит реклама?", qa1:"Цена зависит от формата, длины ролика и количества серий. Оставьте заявку — ответим с идеей и точной ценой.",
   q2:"Не пролистают ли рекламу?", qa2:"Продукт — часть сюжета: герои попадают с ним в смешную ситуацию. Поэтому ролик смотрят как обычный контент, а не как рекламу.",
   q3:"Можно увидеть сценарий заранее?", qa3:"Да. И сценарий, и готовый ролик вы утверждаете до публикации.",
   q4:"Как узнать результат?", qa4:"После публикации присылаем статистику ролика из Instagram: просмотры, охват, лайки и репосты.",
   q5:"Каким бизнесам подходит?", qa5:"Любому продукту из повседневной жизни: еда и напитки, магазины, доставка, связь, банки, приложения, учебные центры. Чем ближе продукт к жизни, тем естественнее получается скетч.",
   b_e:"Заявка", b_h:"Расскажите о вашем бренде",
-  b_p:"Четыре поля — и текст заявки готов. Отправьте его в директ Instagram, а мы ответим с идеей и ценой.",
-  b_dm:"Или сразу напишите в директ",
+  b_p:"Четыре поля — и заявка будет готова в Telegram. Ответим с идеей и ценой.",
   b_brand:"Бренд", b_brand_ph:"Название компании или бренда", b_what:"Что рекламируем?", b_what_ph:"Напиток, приложение, магазин…",
   b_fmt:"Формат", c1:"Внутри сюжета", c2:"Песня о бренде", c3:"Серия", c4:"Отдельный ролик", c5:"Пока не знаю",
-  b_contact:"Контакт", b_contact_ph:"Телефон или Telegram", b_send:"Отправить заявку", b_note:"Текст скопируется, и откроется директ Instagram."
+  b_contact:"Контакт", b_contact_ph:"Телефон или Telegram", b_send:"Отправить в Telegram", b_ig:"Через Instagram",
+  b_note:"В Telegram откроется готовый текст — останется нажать «Отправить».", v_open:"Открыть в Instagram"
 }};
 document.querySelectorAll("[data-i18n]").forEach(el=>T.uz[el.dataset.i18n]=el.textContent);
 document.querySelectorAll("[data-i18n-ph]").forEach(el=>T.uz[el.dataset.i18nPh]=el.placeholder);
@@ -686,6 +697,7 @@ function setLang(l){
   document.querySelectorAll("[data-set-lang]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.setLang===l));
   renderSong(false);
   renderStats();
+  setTg();
   try{localStorage.setItem("lang",l)}catch(e){}
 }
 document.querySelectorAll("[data-set-lang]").forEach(b=>b.onclick=()=>{
@@ -828,6 +840,26 @@ function renderStats(){
   document.getElementById("row1").innerHTML=h;
 })();
 
+/* ===== Reels: the most viewed clips, saved from Instagram on every deploy; the hand-picked cards fill any gap ===== */
+(function(){
+  const box=document.querySelector(".reels"),picked=[...box.querySelectorAll(".reel")];
+  const top=(window.STATS?.reels||[]).filter(r=>r.media).slice(0,5);
+  if(!top.length||!picked.length)return;
+  const cards=top.map(r=>{
+    const c=picked[0].cloneNode(true),img=c.querySelector("img"),name=r.title||"Reels";
+    Object.assign(c.dataset,{video:r.media,name,ig:r.code||""});
+    if(r.url) c.href=r.url;
+    img.src=r.media+".jpg"; img.alt=name;
+    c.querySelector(".cap em").textContent=name;
+    c.querySelector(".cap small").textContent=r.dur?`${Math.floor(r.dur/60)}:${String(r.dur%60).padStart(2,"0")}`:"";
+    c.querySelector(".views")?.remove();
+    return c;
+  });
+  // A hand-picked card whose clip is already among the top ones would show it twice.
+  const rest=picked.filter(c=>!top.some(r=>nameKey(r.title).split(/[^\p{L}']+/u).includes(nameKey(c.dataset.name))));
+  box.replaceChildren(...cards,...rest.slice(0,5-cards.length));
+})();
+
 /* ===== Reels: silent preview on hover (or while in view on touch), full clip with sound in the viewer ===== */
 (function(){
   const reels=[...document.querySelectorAll(".reel")];
@@ -860,6 +892,8 @@ function renderStats(){
     e.preventDefault(); preview(r,false);
     vv.poster=r.querySelector("img").currentSrc; vv.src=r.dataset.video+".mp4"; vv.muted=false;
     document.getElementById("vName").textContent=r.dataset.name;
+    document.getElementById("vMeta").textContent=r.querySelector(".views")?.textContent||"";
+    document.getElementById("vLink").href=r.href;
     viewer.showModal(); vv.play().catch(sync); sync(); requestAnimationFrame(tick);
   }));
   vv.addEventListener("click",()=>vv.paused?vv.play():vv.pause());
@@ -869,13 +903,34 @@ function renderStats(){
   viewer.addEventListener("close",()=>vv.pause());
 })();
 
-/* ===== No backend: copy the message and open Instagram direct, where it gets pasted ===== */
-async function toDirect(msg,el){
-  let ok=false;try{await navigator.clipboard.writeText(msg);ok=true}catch(err){}
+/* ===== No backend: messages go to Telegram (with a draft) or Instagram direct (pasted from the clipboard) ===== */
+const TG="https://t.me/webfastuzb";
+const TG_DRAFT={
+  hi:{uz:"Salom! Reklama bo'yicha yozyapman (aisketch.uz)",ru:"Здравствуйте! Пишу по поводу рекламы (aisketch.uz)"},
+  own:{uz:"Salom! Brendimiz uchun alohida 3D rolik narxi qiziq (aisketch.uz)",ru:"Здравствуйте! Интересует цена отдельного 3D-ролика для нашего бренда (aisketch.uz)"}
+};
+const tgLink=text=>`${TG}?text=${encodeURIComponent(text)}`;
+function setTg(){document.querySelectorAll("[data-tg]").forEach(a=>a.href=tgLink(TG_DRAFT[a.dataset.tg][lang]));}
+// Synchronous, so it runs inside the click: async copies and delayed window.open are what Safari and in-app browsers block.
+function copyText(t){
+  const ta=Object.assign(document.createElement("textarea"),{value:t,readOnly:true});
+  ta.style.cssText="position:fixed;top:0;left:0;opacity:0;font-size:16px";
+  document.body.append(ta);ta.select();ta.setSelectionRange(0,t.length);
+  let ok=false;try{ok=document.execCommand("copy")}catch(e){}
+  ta.remove();
+  if(!ok&&navigator.clipboard) navigator.clipboard.writeText(t).then(()=>{},()=>{});
+  return ok;
+}
+function openChat(url){
+  const w=window.open(url,"_blank");
+  if(w) w.opener=null; else location.href=url; // popup blocked: go there in this tab
+}
+function toDirect(msg,el){
+  const ok=copyText(msg);
+  openChat("https://ig.me/m/aisketchuz");
   el.textContent=ok
     ?(lang==="ru"?"Текст скопирован. Вставьте его в директ и отправьте.":"Matn nusxalandi. Direktga joylashtiring va yuboring.")
     :(lang==="ru"?"Напишите в директ:\n":"Direktga yozing:\n")+msg;
-  setTimeout(()=>window.open("https://ig.me/m/aisketchuz","_blank","noopener"),350);
 }
 
 /* ===== Name song generator ===== */
@@ -931,25 +986,33 @@ document.getElementById("sendBtn").onclick=()=>{
 /* ===== Ad brief: brand and contact are required, the rest helps us answer with a price ===== */
 (function(){
   const form=document.getElementById("brief"),st=document.getElementById("bStatus");
-  document.querySelectorAll("[data-pick]").forEach(a=>a.addEventListener("click",()=>{form.elements.fmt.value=a.dataset.pick;}));
   form.addEventListener("input",e=>e.target.removeAttribute("aria-invalid"));
-  form.addEventListener("submit",e=>{
-    e.preventDefault();
+  // The brief as a message, or null after pointing at what is missing.
+  function brief(){
     const val=n=>form.elements[n].value.trim(),ru=lang==="ru";
     const miss=["brand","contact"].filter(n=>!val(n));
     miss.forEach(n=>form.elements[n].setAttribute("aria-invalid","true"));
     st.classList.toggle("err",miss.length>0);
     if(miss.length){
       st.textContent=ru?"Укажите бренд и контакт: телефон или Telegram.":"Brend nomi va aloqa uchun telefon yoki Telegram yozing.";
-      form.elements[miss[0]].focus();return;
+      form.elements[miss[0]].focus();return null;
     }
     const fmt=form.querySelector("input[name=fmt]:checked+span").textContent;
     const L=ru?["Здравствуйте! Заявка на рекламу","Бренд","Продукт","Формат","Контакт"]:["Salom! Reklama bo'yicha ariza","Brend","Mahsulot","Format","Aloqa"];
-    toDirect([L[0]+" 📩",`${L[1]}: ${val("brand")}`,val("what")&&`${L[2]}: ${val("what")}`,`${L[3]}: ${fmt}`,`${L[4]}: ${val("contact")}`].filter(Boolean).join("\n"),st);
+    return [L[0]+" 📩",`${L[1]}: ${val("brand")}`,val("what")&&`${L[2]}: ${val("what")}`,`${L[3]}: ${fmt}`,`${L[4]}: ${val("contact")}`].filter(Boolean).join("\n");
+  }
+  form.addEventListener("submit",e=>{
+    e.preventDefault();
+    const msg=brief(); if(!msg)return;
+    copyText(msg); // a backup, in case Telegram drops the draft
+    openChat(tgLink(msg));
+    st.textContent=lang==="ru"?"Открыли Telegram с готовым текстом — нажмите «Отправить».":"Telegram ochildi, matn tayyor — «Yuborish»ni bosing.";
   });
+  document.getElementById("bIg").addEventListener("click",()=>{const msg=brief(); if(msg) toDirect(msg,st);});
 })();
 
 renderStats();
+setTg();
 try{const sv=localStorage.getItem("lang");if(sv==="ru"||(!sv&&/^ru/i.test(navigator.language)))setLang("ru");}catch(e){}
 </script>
 </body>
