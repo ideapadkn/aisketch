@@ -1,0 +1,73 @@
+# Publishes the site to GitHub Pages with fresh Instagram numbers in assets/stats.js.
+# Runs on every push to main and every morning. Settings → Pages → Source must be "GitHub Actions".
+# Secrets: IG_TOKEN (Instagram token); optional GH_PAT lets the workflow renew IG_TOKEN. Setup: scripts/README.md.
+name: Site
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "0 3 * * *" # 08:00 in Tashkent
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # A failure here must not block a deploy of site changes; it is reported at the end instead.
+      - name: Fresh numbers from Instagram
+        id: stats
+        continue-on-error: true
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+        run: node scripts/update-stats.mjs
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - id: deploy
+        uses: actions/deploy-pages@v4
+
+      # Instagram tokens live 60 days; renewing weekly keeps IG_TOKEN valid. Needs GH_PAT with "Secrets: write".
+      - name: Renew the Instagram token
+        if: github.event_name == 'schedule' && steps.stats.outcome == 'success'
+        continue-on-error: true
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          token=$(printf %s "$IG_TOKEN" | tr -d '[:space:]')
+          if [ -z "$token" ] || [ -z "$GH_TOKEN" ] || [ "$(date -u +%u)" != 1 ]; then echo "Not today."; exit 0; fi
+          fresh=$(curl -fsS "https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=$token" | jq -r .access_token)
+          echo "::add-mask::$fresh"
+          if [ -z "$fresh" ] || [ "$fresh" = null ]; then echo "Instagram did not return a token."; exit 1; fi
+          printf %s "$fresh" | gh secret set IG_TOKEN --repo "$GITHUB_REPOSITORY"
+          echo "IG_TOKEN renewed for 60 days."
+
+      - name: Report stale numbers
+        if: steps.stats.outcome == 'failure'
+        run: |
+          echo "::error::Instagram numbers were not updated (see the 'Fresh numbers from Instagram' step). Usually IG_TOKEN has expired: scripts/README.md."
+          exit 1
