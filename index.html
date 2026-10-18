@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
 <title>ai sketch — o'zbekcha AI multfilmlar</title>
-<meta name="description" content="aisketchuz: O'zbekiston hayotidan 3D AI multfilmlar. Ismga qo'shiq va brendingiz uchun multfilm reklama: syujet ichida, brendga qo'shiq, seriya.">
+<meta name="description" content="aisketchuz: O'zbekiston hayotidan 3D AI multfilmlar. Brendingiz uchun multfilm reklama va qahramonli jonli saytlar.">
 <meta name="theme-color" content="#060D26">
 <meta property="og:title" content="ai sketch — o'zbekcha AI multfilmlar">
-<meta property="og:description" content="O'zbekcha 3D AI multfilmlar: ismga qo'shiq va brendingiz uchun multfilm reklama.">
+<meta property="og:description" content="3D AI multfilmlar: brendingiz uchun reklama va jonli saytlar.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://aisketch.uz">
 <meta property="og:image" content="https://aisketch.uz/logo.jpg">
@@ -16,17 +16,20 @@
 <link rel="apple-touch-icon" href="assets/icon.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;700&family=Unbounded:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600;700&family=Unbounded:wght@500;600&display=swap" rel="stylesheet">
 <style>
-/* Registan at night: lapis, glaze, plaster and a little gold */
+/* Registan at night: lapis, glaze, plaster and a little gold; the stage adds saffron light and carpet red */
 :root{
   --ink:#060D26;
   --ink-2:#0A1431;
+  --ink-3:#0E1A3D;
   --ivory:#EFE7D8;
   --muted:#A6A194;
   --glaze:#3CC8D0;
   --gold:#C9A45C;
+  --saffron:#F2B441;
   --anor:#D0506C;
+  --carpet:#8E2B3A;
   --rose:#E8798F;
   --line:rgba(201,164,92,.34);
   --line-2:rgba(239,231,216,.1);
@@ -48,6 +51,7 @@ img{display:block;max-width:100%}
 h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.01em;text-wrap:balance}
 p{text-wrap:pretty}
 .eyebrow{font:500 11px/1.5 var(--label);letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 
 /* header: sticky, so the ad button is always one tap away */
 .top{position:sticky;top:0;z-index:50;border-bottom:1px solid transparent;transition:background-color .4s var(--ease),border-color .4s var(--ease)}
@@ -55,7 +59,7 @@ p{text-wrap:pretty}
 .bar{display:flex;align-items:center;gap:24px;padding-block:18px}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;font:600 17px/1 var(--label);letter-spacing:-.01em}
 .brand img{width:34px;height:34px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 1px var(--line)}
-.nav{display:flex;gap:36px;margin-left:auto}
+.nav{display:flex;gap:32px;margin-left:auto}
 .nav a{font-size:15px;color:var(--muted);text-decoration:none;transition:color .3s}
 .nav a:hover{color:var(--ivory)}
 .lang{display:flex;gap:6px;margin-left:16px}
@@ -67,7 +71,6 @@ p{text-wrap:pretty}
 .btn{display:inline-flex;align-items:center;justify-content:center;font:500 16px/1.2 var(--sans);letter-spacing:.01em;text-decoration:none;text-align:center;border-radius:999px;padding:17px 32px;cursor:pointer;border:1px solid transparent;transition:background-color .4s var(--ease),border-color .4s var(--ease),color .4s var(--ease)}
 .btn-sm{padding:11px 22px;font-size:15px}
 .btn .ico{width:16px;height:16px;flex:none;margin-right:9px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-button.link{font:inherit;font-weight:500;color:inherit;background:none;border:0;border-bottom:1px solid var(--line);cursor:pointer}
 .btn-solid{background:var(--ivory);color:var(--ink)}
 .btn-solid:hover{background:var(--gold)}
 .btn-line{border-color:var(--line);background:none;color:var(--ivory)}
@@ -75,10 +78,20 @@ button.link{font:inherit;font-weight:500;color:inherit;background:none;border:0;
 .link{font-weight:500;text-decoration:none;padding-bottom:5px;border-bottom:1px solid var(--line);transition:border-color .4s}
 .link::after{content:"\00a0\00a0→"}
 .link:hover{border-color:var(--gold)}
+button.link{font:inherit;font-weight:500;color:inherit;background:none;border:0;border-bottom:1px solid var(--line);cursor:pointer}
 
-/* hero */
-.hero{display:grid;grid-template-columns:1.15fr 1fr;gap:48px;align-items:center;min-height:min(84vh,780px);padding:24px 0 72px}
-.hero .copy{container-type:inline-size}
+/* ===== The stage: the cast lives here ===== */
+.hero-wrap{position:relative;overflow:hidden;background:
+  radial-gradient(52% 48% at 74% 60%,rgba(60,200,208,.14),transparent 70%),
+  radial-gradient(36% 26% at 72% 96%,rgba(242,180,65,.14),transparent 70%),
+  linear-gradient(#060D26,#081436 72%,#060D26)}
+.garland{position:absolute;left:0;right:0;top:0;height:110px;pointer-events:none;z-index:3}
+.garland svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.garland path{fill:none;stroke:rgba(239,231,216,.3);stroke-width:1.2;vector-effect:non-scaling-stroke}
+.bulb{position:absolute;width:9px;height:12px;margin:-1px 0 0 -4.5px;border-radius:50% 50% 45% 45%;background:var(--c);box-shadow:0 0 10px 2px var(--c),0 0 24px 6px color-mix(in srgb,var(--c) 40%,transparent);animation:twinkle var(--tw) ease-in-out var(--dl) infinite}
+@keyframes twinkle{50%{opacity:.4;box-shadow:0 0 4px 1px var(--c)}}
+.hero{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:24px 40px;align-items:center;min-height:min(calc(100vh - 73px),880px);padding-block:76px 36px}
+.hero .copy{container-type:inline-size;position:relative;z-index:4}
 .hero .eyebrow{margin-bottom:28px}
 .hero h1{font-size:clamp(40px,5.6vw,80px);line-height:1}
 .hero h1 .l{display:block}
@@ -94,17 +107,46 @@ button.link{font:inherit;font-weight:500;color:inherit;background:none;border:0;
 .ready .in{animation-play-state:running}
 .hero .eyebrow{--d:.05s}.hero .l:first-child{--d:.15s}.hero .l+.l{--d:.28s}.lede{--d:.45s}.hero .btns{--d:.6s}
 @keyframes rise{from{opacity:0;transform:translateY(24px)}}
-.stage{position:relative;aspect-ratio:1/.92;width:100%;cursor:crosshair;touch-action:pan-y}
-.stage .arch{position:absolute;left:6%;top:2%;width:56%;overflow:visible}
+
+.stage{position:relative;width:100%;aspect-ratio:1/.93;isolation:isolate;--mx:0;--my:0}
+.stage .arch{position:absolute;left:50%;top:-6%;width:56%;transform:translateX(-50%);overflow:visible;z-index:0}
 .arch .l{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 2.4s var(--ease) .2s forwards;animation-play-state:paused}
 .ready .arch .l{animation-play-state:running}
 @keyframes draw{to{stroke-dashoffset:0}}
-#logoCanvas{position:absolute;inset:0;width:100%;height:100%}
-.hint{position:absolute;left:34%;top:calc(100% + 10px);transform:translateX(-50%);display:flex;align-items:center;gap:10px;white-space:nowrap;pointer-events:none;font-size:14px;color:var(--muted)}
+.spot{position:absolute;top:-14%;width:42%;height:116%;z-index:1;pointer-events:none;background:linear-gradient(rgba(255,214,140,.24),rgba(255,214,140,.05) 68%,transparent);clip-path:polygon(42% 0,58% 0,100% 100%,0 100%);mix-blend-mode:screen;filter:blur(16px);transform-origin:50% 0;transition:transform 1s var(--ease)}
+.spot-l{left:6%;transform:rotate(calc(-17deg + var(--mx) * 5deg))}
+.spot-r{right:6%;transform:rotate(calc(17deg + var(--mx) * 5deg))}
+.deck{position:absolute;left:2%;right:2%;bottom:1%;height:25%;z-index:1}
+.deck::before{content:"";position:absolute;inset:0 0 34% 0;border-radius:50%;background:radial-gradient(ellipse at 50% 42%,rgba(255,206,130,.4),transparent 64%),repeating-linear-gradient(97deg,#6e4527 0 26px,#5a371f 26px 28px);box-shadow:inset 0 -8px 20px rgba(0,0,0,.45)}
+.deck::after{content:"";position:absolute;left:1.6%;right:1.6%;top:33%;bottom:0;z-index:-1;border-radius:0 0 50% 50%/0 0 46% 46%;background:repeating-linear-gradient(90deg,#4a2c17 0 30px,#3c2312 30px 32px);box-shadow:inset 0 12px 20px rgba(0,0,0,.6)}
+.carpet{position:absolute;left:21%;right:21%;top:11%;height:44%;z-index:1;border-radius:50%;opacity:.95;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='34'%3E%3Crect width='34' height='34' fill='%238E2B3A'/%3E%3Cpath d='M17 3l14 14-14 14L3 17z' fill='none' stroke='%23C9A45C' stroke-width='1.5'/%3E%3Cpath d='M17 10l7 7-7 7-7-7z' fill='%233CC8D0' fill-opacity='.75'/%3E%3Ccircle cx='17' cy='17' r='2' fill='%23EFE7D8'/%3E%3C/svg%3E") center/30px 30px;
+  box-shadow:inset 0 0 0 3px var(--gold),inset 0 0 0 7px var(--carpet),inset 0 -10px 24px rgba(0,0,0,.4)}
+.banner{position:absolute;left:50%;top:5%;z-index:2;display:block;min-width:46%;max-width:76%;padding:2px;background:var(--gold);text-decoration:none;text-align:center;
+  clip-path:polygon(0 0,100% 0,100% 74%,50% 100%,0 74%);transform:translateX(-50%);transform-origin:50% 0;animation:swing 6s ease-in-out infinite}
+.banner span{display:block;padding:12px 24px 28px;background:linear-gradient(#a3364a,#741f2e);clip-path:polygon(0 0,100% 0,100% 74%,50% 100%,0 74%);
+  font:600 clamp(11px,1.25vw,15px)/1.25 var(--label);letter-spacing:.16em;text-transform:uppercase;color:var(--saffron);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@keyframes swing{0%,100%{transform:translateX(-50%) rotate(-1.3deg)}50%{transform:translateX(-50%) rotate(1.3deg)}}
+
+.actor{position:absolute;left:var(--x);bottom:var(--b);height:var(--h);z-index:var(--z);padding:0;border:0;background:none;pointer-events:none;-webkit-tap-highlight-color:transparent;
+  transform:translateX(-50%) translate3d(calc(var(--mx,0) * var(--dp,1) * 16px),calc(var(--my,0) * var(--dp,1) * 6px),0);transition:transform .8s var(--ease)}
+.actor img{display:block;height:100%;width:auto;max-width:none;transform-origin:50% 100%;animation:bob var(--t,3.6s) ease-in-out var(--dl,0s) infinite;filter:drop-shadow(0 14px 14px rgba(0,0,0,.5)) brightness(var(--lit,1))}
+.actor::before{content:"";position:absolute;left:14%;right:14%;bottom:-2%;height:6%;border-radius:50%;background:radial-gradient(rgba(0,0,0,.6),transparent 70%)}
+.actor:focus-visible{outline:1px dashed var(--gold);outline-offset:6px;border-radius:14px}
+/* Only the body takes taps: the transparent corners of an image would steal clicks from whoever stands behind */
+.actor .hit{position:absolute;inset:6% var(--hr,22%) 3% var(--hl,22%);border-radius:45%;pointer-events:auto;cursor:pointer}
+.actor.hop img{animation:hop .6s var(--ease)}
+.actor.talk{z-index:10}
+@keyframes bob{0%,100%{transform:translateY(0) scale(1,1)}50%{transform:translateY(-1.4%) scale(1.004,1.012)}}
+@keyframes hop{30%{transform:translateY(-9%) scale(.98,1.04)}62%{transform:translateY(0) scale(1.04,.96)}}
+.say{position:absolute;left:50%;bottom:calc(100% + 10px);z-index:5;width:max-content;max-width:220px;padding:10px 14px;border-radius:18px;background:var(--ivory);color:var(--ink);
+  font:600 14px/1.3 var(--sans);text-align:center;box-shadow:0 12px 30px rgba(0,0,0,.45);pointer-events:none;opacity:0;transform:translate(-50%,10px) scale(.8);transform-origin:50% 100%;transition:opacity .25s,transform .4s var(--ease)}
+.say::after{content:"";position:absolute;left:50%;top:100%;margin-left:-8px;border:8px solid transparent;border-top-color:var(--ivory)}
+.talk>.say{opacity:1;transform:translate(-50%,0) scale(1)}
+.hint{position:absolute;left:50%;bottom:-30px;transform:translateX(-50%);display:flex;align-items:center;gap:10px;white-space:nowrap;pointer-events:none;font-size:14px;color:var(--muted)}
 .hint i{width:6px;height:6px;transform:rotate(45deg);background:var(--anor)}
 
 .orn{height:24px;border-block:1px solid var(--line-2);background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='22'%3E%3Cg fill='none' stroke='%23C9A45C' stroke-opacity='.55'%3E%3Cpath d='M14 3l8 8-8 8-8-8z'/%3E%3Cpath d='M14 8l3 3-3 3-3-3z'/%3E%3C/g%3E%3Cpath d='M0 10h2v2H0zM26 10h2v2h-2z' fill='%23C9A45C' fill-opacity='.55'/%3E%3C/svg%3E") repeat-x center/28px 22px}
-
 .marq{overflow:hidden;padding:44px 0;border-bottom:1px solid var(--line-2)}
 .row{display:flex;align-items:center;width:max-content;animation:mq 90s linear infinite}
 .marq:hover .row{animation-play-state:paused}
@@ -125,7 +167,62 @@ h2{font-size:clamp(40px,4.8vw,68px);line-height:1.02}
   .rv{animation:rise linear both;animation-timeline:view();animation-range:entry 0% entry 60%}
 }
 
-/* numbers: a ledger of three figures beside the top-5 reels */
+/* ===== Try it: your brand on stage, as a reel ===== */
+.demo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.78fr);gap:56px 80px;align-items:center}
+.tabs{display:inline-flex;gap:4px;padding:4px;margin-bottom:30px;border:1px solid var(--line);border-radius:999px}
+.tabs button{font:500 15px/1 var(--sans);color:var(--muted);background:none;border:0;border-radius:999px;padding:11px 20px;cursor:pointer;transition:color .3s,background-color .3s}
+.tabs button:hover{color:var(--ivory)}
+.tabs [aria-selected="true"]{background:var(--ivory);color:var(--ink)}
+.demo label{display:block;margin-bottom:12px}
+.demo input{width:100%;font:500 clamp(38px,4.2vw,56px)/1.2 var(--serif);padding:4px 0 14px;border:0;border-bottom:1px solid var(--line);border-radius:0;background:none;color:var(--ivory);caret-color:var(--glaze);transition:border-color .4s}
+.demo input::placeholder{color:rgba(239,231,216,.26)}
+.demo input:focus{outline:none;border-color:var(--glaze)}
+.quick{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 18px;margin-top:20px;font-size:15px;color:var(--muted)}
+.quick button{font:inherit;color:var(--ivory);background:none;border:0;border-bottom:1px solid var(--line-2);padding:2px 0;cursor:pointer;transition:border-color .3s}
+.quick button:hover{border-color:var(--gold)}
+.singers-label{margin-top:34px}
+.singers{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.singers button{display:inline-flex;align-items:center;gap:9px;padding:4px 15px 4px 4px;border:1px solid var(--line-2);border-radius:999px;background:none;color:var(--muted);font:500 15px/1 var(--sans);cursor:pointer;transition:color .3s,border-color .3s,background-color .3s}
+.singers button:hover{color:var(--ivory)}
+.singers img{width:32px;height:32px;border-radius:50%;object-fit:cover;object-position:50% 6%;background:var(--ink-3)}
+.singers [aria-pressed="true"]{color:var(--ivory);border-color:var(--gold);background:rgba(201,164,92,.12)}
+.song-meta{margin-top:34px;padding-top:26px;border-top:1px solid var(--line-2)}
+.song-meta h3{font-size:34px;line-height:1.05;margin:6px 0 4px}
+.by{font-size:15px;color:var(--muted)}
+.card-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px 16px;margin-top:28px}
+.status{min-height:24px;margin-top:16px;font-size:15px;color:var(--glaze);white-space:pre-line}
+.status.err{color:var(--rose)}
+
+.phone{position:relative;width:min(100%,330px);aspect-ratio:9/18.5;margin-inline:auto;padding:9px;border-radius:46px;background:#03050c;box-shadow:0 0 0 1px rgba(239,231,216,.14),0 0 0 8px #0c1226,0 50px 90px rgba(0,0,0,.55)}
+.screen{position:relative;height:100%;overflow:hidden;border-radius:37px;background:radial-gradient(70% 46% at 50% 62%,rgba(60,200,208,.2),transparent 70%),linear-gradient(#0a1640,#060D26 78%)}
+.screen .garland{height:72px;top:6px}
+.screen .bulb{width:6px;height:8px;margin-left:-3px}
+.screen .tick{position:absolute;left:14px;right:14px;top:12px;z-index:6;height:2px;border-radius:2px;background:rgba(255,255,255,.25)}
+.screen .tick b{display:block;width:0;height:100%;border-radius:2px;background:#fff}
+.screen .banner{top:12%;min-width:64%;animation-duration:5s}
+.screen .banner span{padding:9px 14px 20px;font-size:12px}
+.screen .deck{left:-8%;right:-8%;bottom:7%;height:21%}
+.screen .spot{top:-6%;width:70%;height:90%}
+.screen .spot-l{left:-12%}.screen .spot-r{right:-12%}
+.singer{position:absolute;left:0;right:0;bottom:16%;z-index:3;height:46%;width:auto;max-width:none;margin-inline:auto;transform-origin:50% 100%;filter:drop-shadow(0 12px 14px rgba(0,0,0,.55));animation:bob 3.2s ease-in-out infinite}
+.singer.hop{animation:hop .6s var(--ease)}
+.subs{position:absolute;left:14px;right:52px;bottom:70px;z-index:6;min-height:2.7em;font:700 15px/1.35 var(--sans);color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.85)}
+.subs .nm{color:var(--saffron)}
+.ig-side{position:absolute;right:12px;bottom:76px;z-index:6;display:grid;gap:14px;justify-items:center;color:#fff;font:600 10px/1 var(--sans)}
+.ig-side svg{width:24px;height:24px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linejoin:round;stroke-linecap:round}
+.ig-side span{display:grid;gap:4px;justify-items:center}
+.ig-foot{position:absolute;left:14px;right:14px;bottom:16px;z-index:6;color:#fff;font:500 12px/1.4 var(--sans)}
+.ig-foot b{display:flex;align-items:center;gap:8px;margin-bottom:4px;font-size:13px;font-weight:700}
+.ig-foot b img{width:24px;height:24px;border-radius:50%}
+.ig-foot span{display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;opacity:.9}
+
+/* ===== Numbers ===== */
+#raqamlar .wrap{position:relative}
+.peek{position:absolute;right:-30px;top:-120px;z-index:2;width:150px;pointer-events:none;transform:translateX(40px) rotate(8deg);opacity:0;transition:transform 1s var(--ease),opacity .6s}
+.peek.seen{transform:none;opacity:1}
+.peek img{width:100%;height:auto;filter:drop-shadow(0 12px 14px rgba(0,0,0,.45))}
+.peek .say{left:auto;right:70%;bottom:62%;transform:none;opacity:1}
+.peek .say::after{left:auto;right:18px}
 .stats{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:56px 80px;align-items:start}
 .stats .eyebrow{margin-bottom:16px}
 .kpi{padding:26px 0 22px;border-top:1px solid var(--line)}
@@ -149,6 +246,7 @@ h2{font-size:clamp(40px,4.8vw,68px);line-height:1.02}
 }
 @keyframes grow{from{transform:scaleX(0)}}
 
+/* ===== Reels ===== */
 .reels{display:grid;grid-template-columns:repeat(5,1fr);gap:20px}
 .reel{position:relative;display:block;text-decoration:none}
 .reel .frame{position:relative;display:block;aspect-ratio:9/16;clip-path:url(#archTall);background:var(--ink-2)}
@@ -165,8 +263,7 @@ h2{font-size:clamp(40px,4.8vw,68px);line-height:1.02}
 .views::before{content:"";border-style:solid;border-width:4.5px 0 4.5px 7px;border-color:transparent transparent transparent currentColor}
 .cap{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:16px}
 .cap em{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:.1em;font:italic 500 24px/1.1 var(--serif)}
-.cap small{flex:none}
-.cap small{font:500 10px/1 var(--label);letter-spacing:.18em;color:var(--muted)}
+.cap small{flex:none;font:500 10px/1 var(--label);letter-spacing:.18em;color:var(--muted)}
 .reels-cta{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:16px 32px;margin-top:48px}
 .reels-cta p{font-size:15px;color:var(--muted)}
 
@@ -186,33 +283,9 @@ html:has(.viewer[open]){overflow:hidden}
 .v-cap h3{font:italic 500 40px/1.1 var(--serif);margin:6px 0 14px}
 .v-x{position:absolute;top:20px;right:20px;width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:none;color:var(--ivory);font:300 24px/1 var(--sans);cursor:pointer;transition:border-color .3s}
 .v-x:hover{border-color:var(--gold)}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 
-.gen-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:72px;align-items:start}
-.gen label{display:block;margin-bottom:12px}
-.gen input{width:100%;font:500 clamp(38px,4.2vw,56px)/1.2 var(--serif);padding:4px 0 14px;border:0;border-bottom:1px solid var(--line);border-radius:0;background:none;color:var(--ivory);caret-color:var(--glaze);transition:border-color .4s}
-.gen input::placeholder{color:rgba(239,231,216,.22)}
-.gen input:focus{outline:none;border-color:var(--glaze)}
-.quick{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 18px;margin-top:22px;font-size:15px;color:var(--muted)}
-.quick button{font:inherit;color:var(--ivory);background:none;border:0;border-bottom:1px solid var(--line-2);padding:2px 0;cursor:pointer;transition:border-color .3s}
-.quick button:hover{border-color:var(--gold)}
+/* ===== Ad formats ===== */
 .panel{border:1px solid var(--line);outline:1px solid var(--line-2);outline-offset:-9px}
-.track{padding:44px;background:var(--ink);min-height:420px}
-.now{position:relative;display:flex;align-items:center;gap:20px;padding:0 52px 26px 0;margin-bottom:28px;border-bottom:1px solid var(--line-2)}
-.cover{width:60px;height:80px;flex:none;object-fit:cover;clip-path:url(#archClip)}
-.now h3{font-size:32px;line-height:1.05;margin:6px 0 4px}
-.by{font-size:15px;color:var(--muted)}
-.by span{white-space:nowrap}
-.dur{position:absolute;top:0;right:0;font:500 11px/1.5 var(--label);letter-spacing:.18em;color:var(--muted)}
-.lyrics{font:italic 500 clamp(25px,2.5vw,32px)/1.38 var(--serif);white-space:pre-line;min-height:5.6em}
-.lyrics .nm{color:var(--glaze)}
-.lyrics .ghost{visibility:hidden}
-.card-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px 16px;margin-top:36px}
-.status{min-height:24px;margin-top:16px;font-size:15px;color:var(--glaze);white-space:pre-line}
-.status.err{color:var(--rose)}
-.empty{display:grid;place-items:center;min-height:330px;text-align:center;color:var(--muted)}
-.empty img{width:66px;height:88px;margin:0 auto 22px;object-fit:cover;clip-path:url(#archClip)}
-
 .ads{padding:clamp(36px,5.5vw,76px)}
 .ads-head{display:grid;grid-template-columns:1.1fr 1fr;gap:28px 64px;align-items:end;margin-bottom:56px}
 .ads-head .eyebrow{margin-bottom:22px}
@@ -232,13 +305,50 @@ html:has(.viewer[open]){overflow:hidden}
 .sp{display:block;margin-bottom:10px;font:500 10px/1.2 var(--label);letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
 /* Fourth offer: a standalone film for the brand's own channels, starring the cast */
 .own{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:28px 48px;align-items:center;margin-top:64px;padding-top:56px;border-top:1px solid var(--line)}
-.cast{display:grid;grid-template-columns:repeat(5,minmax(0,60px));gap:6px}
-.cast img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;clip-path:url(#archClip)}
+.cast{display:flex;align-items:flex-end;height:120px}
+.cast img{height:100%;width:auto;margin-left:-18px;filter:drop-shadow(0 8px 10px rgba(0,0,0,.45))}
+.cast img:first-child{margin-left:0}
+.cast img:nth-child(even){height:88%}
 .own h3{font-size:clamp(28px,2.6vw,36px);line-height:1.1;margin:12px 0 10px}
 .own h3+p{max-width:54ch;font-size:16px;color:var(--muted)}
 
+/* ===== Websites ===== */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.tile{position:relative;display:flex;flex-direction:column;min-width:0;min-height:400px;padding:24px;border:1px solid var(--line-2);border-radius:28px;background:linear-gradient(180deg,rgba(239,231,216,.045),rgba(239,231,216,.01))}
+.tile .area{position:relative;flex:1;min-height:200px;margin-bottom:22px;border-radius:18px;background:radial-gradient(80% 70% at 50% 60%,rgba(60,200,208,.12),transparent 70%)}
+.tile h3{font-size:26px;line-height:1.1;margin-bottom:8px}
+.tile p{font-size:15px;color:var(--muted)}
+.doppi{position:absolute;inset:0;cursor:crosshair;touch-action:pan-y}
+.doppi canvas{position:absolute;inset:0;width:100%;height:100%}
+.tile .actor{--x:50%;--b:4%;--h:88%;--dp:0}
+.live{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:8px;text-align:center}
+.live b{font:500 clamp(36px,3.4vw,48px)/1 var(--serif);font-variant-numeric:lining-nums;white-space:nowrap}
+.live small{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted)}
+.live small i{width:8px;height:8px;border-radius:50%;background:#3ee08f;box-shadow:0 0 0 0 rgba(62,224,143,.6);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(62,224,143,0)}}
+.tgm{position:absolute;left:6px;right:6px;bottom:18px;display:grid;grid-template-columns:auto 1fr;gap:3px 10px;padding:12px;border-radius:16px;background:#17212b;box-shadow:0 18px 40px rgba(0,0,0,.45);font-size:12px;line-height:1.35;animation:notify 6s var(--ease) infinite}
+.tgm .av{grid-row:span 3;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#2AABEE}
+.tgm .av svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.tgm b{display:flex;justify-content:space-between;gap:8px;font-weight:700;color:#fff}
+.tgm b small{font-weight:400;color:#7f91a4}
+.tgm span{color:#c7d0d9}
+@keyframes notify{0%{opacity:0;transform:translateY(24px)}8%,80%{opacity:1;transform:none}92%,100%{opacity:0;transform:translateY(-8px)}}
+.chips-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.chips-row span{padding:8px 15px;border:1px solid var(--line-2);border-radius:999px;font-size:14px;color:var(--muted)}
+.packs{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:72px}
+.pack{position:relative;display:flex;flex-direction:column;padding:34px 28px 30px;border:1px solid var(--line);border-radius:28px}
+.pack.hot{border-color:var(--gold);background:linear-gradient(160deg,rgba(201,164,92,.16),rgba(60,200,208,.06))}
+.pack .badge{position:absolute;top:-12px;left:28px;padding:6px 12px;border-radius:999px;background:var(--saffron);color:var(--ink);font:600 10px/1 var(--label);letter-spacing:.14em;text-transform:uppercase}
+.pack h3{font-size:36px;line-height:1;margin:8px 0}
+.pack .sub{margin-bottom:22px;color:var(--muted)}
+.pack ul{display:grid;gap:10px;margin-bottom:30px;list-style:none}
+.pack li{display:flex;gap:12px;font-size:16px}
+.pack li::before{content:"";flex:none;width:7px;height:7px;margin-top:9px;transform:rotate(45deg);border:1px solid var(--gold)}
+.pack .btn{margin-top:auto;align-self:flex-start}
+.packs-note{margin-top:22px;font-size:15px;color:var(--muted)}
+
 /* process: four steps on one gold line */
-#jarayon,#savollar{padding-top:0}
+#savollar{padding-top:0}
 .steps{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:32px;border-top:1px solid var(--line)}
 .steps li{position:relative;padding-top:34px}
 .steps li::before{content:"";position:absolute;left:0;top:-4px;width:7px;height:7px;transform:rotate(45deg);border:1px solid var(--gold);background:var(--ink)}
@@ -258,9 +368,10 @@ html:has(.viewer[open]){overflow:hidden}
 .faq summary:hover{color:var(--gold)}
 .faq details p{max-width:60ch;padding:0 0 28px;color:var(--muted)}
 
-/* brief: no backend, the form only composes a message for Instagram direct */
+/* brief: no backend, the form only composes a message for Telegram */
 .brief-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:48px 72px;align-items:start}
 .brief-grid .lead{margin-bottom:30px}
+.contacts{display:flex;flex-wrap:wrap;gap:14px 28px}
 .form{padding:44px;background:var(--ink)}
 .field{min-width:0;margin-bottom:30px;border:0}
 .field>.eyebrow{display:block;margin-bottom:10px}
@@ -277,9 +388,19 @@ legend.eyebrow{float:left;width:100%;padding:0;margin-bottom:12px}
 .chips input:checked+span{color:var(--ivory);border-color:var(--gold);background:rgba(201,164,92,.12)}
 .chips input:focus-visible+span{outline:1px solid var(--gold);outline-offset:3px}
 .form-actions{display:flex;flex-wrap:wrap;align-items:center;gap:18px 28px}
-.contacts{display:flex;flex-wrap:wrap;gap:14px 28px}
 .note{margin-top:14px;font-size:14px;color:var(--muted)}
 
+/* footer, with the hedgehog sweeping along it */
+.lane{position:relative;height:150px;overflow:hidden;margin-top:-150px;pointer-events:none}
+.sweeper{position:absolute;bottom:0;left:-90px;height:84px;padding:0;border:0;background:none;cursor:pointer;pointer-events:auto;animation:walk 40s linear infinite}
+.sweeper .face{display:block;height:100%;animation:face 40s steps(1) infinite}
+.sweeper img{height:100%;width:auto;max-width:none;transform-origin:50% 100%;animation:sweep .45s ease-in-out infinite alternate;filter:drop-shadow(0 8px 8px rgba(0,0,0,.45))}
+.sweeper:hover,.sweeper.talk{animation-play-state:paused}
+.sweeper:hover .face,.sweeper.talk .face{animation-play-state:paused}
+@keyframes walk{50%{left:calc(100% + 10px)}}
+@keyframes face{50%{transform:scaleX(-1)}}
+@keyframes sweep{to{transform:rotate(-5deg)}}
+.lane .say{bottom:calc(100% + 6px)}
 footer{display:flex;flex-wrap:wrap;align-items:center;gap:20px 40px;padding:40px 0 calc(48px + env(safe-area-inset-bottom));font-size:15px;color:var(--muted)}
 footer nav{display:flex;gap:28px;margin-left:auto}
 footer nav a{text-decoration:none;color:var(--ivory);transition:color .3s}
@@ -287,16 +408,21 @@ footer nav a:hover{color:var(--gold)}
 
 ::view-transition-group(root){animation-duration:.45s}
 
+@media (max-width:1080px){
+  .tiles{grid-template-columns:repeat(2,1fr)}
+}
 @media (max-width:900px){
   .bar{gap:16px}
   .nav{display:none}
   .lang{margin-left:auto}
-  .hero{grid-template-columns:1fr;min-height:0;gap:0;padding:8px 0 64px}
-  .stage{order:-1;max-width:520px;margin:0 auto 64px}
-  .hint{left:50%}
+  .hero{grid-template-columns:1fr;min-height:0;gap:28px;padding-block:72px 64px}
+  .stage{max-width:520px;margin:0 auto;width:100%}
+  .lede{margin:24px 0 32px}
   .sec-head{grid-template-columns:1fr;margin-bottom:40px}
-  .stats,.faq-grid,.brief-grid{grid-template-columns:1fr}
+  .demo,.stats,.faq-grid,.brief-grid{grid-template-columns:1fr}
+  .demo{gap:48px}
   .faq-grid,.brief-grid{gap:36px}
+  .peek{display:none}
   .bars li{grid-template-columns:24px minmax(0,1fr);gap:8px 14px}
   .bt{grid-column:2}
   .reels,.story{grid-template-columns:none;grid-auto-flow:column;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
@@ -304,16 +430,14 @@ footer nav a:hover{color:var(--gold)}
   .reels{grid-auto-columns:min(62%,280px);margin:0 -24px;padding:0 24px;scroll-padding:0 24px}
   .story{grid-auto-columns:min(80%,340px);margin:0 -24px;padding:0 24px;scroll-padding:0 24px}
   .reel,.story figure{scroll-snap-align:start}
-  .gen-grid,.ads-head{grid-template-columns:1fr;gap:48px}
-  .ads-head{gap:20px;margin-bottom:40px}
+  .ads-head{grid-template-columns:1fr;gap:20px;margin-bottom:40px}
   .ads{padding:36px 24px}
   .own{grid-template-columns:1fr;gap:22px;margin-top:48px;padding-top:40px}
   .own .btn{justify-self:start}
+  .cast{height:96px}
+  .packs{grid-template-columns:1fr;margin-top:56px}
   .steps{grid-template-columns:1fr;gap:0;border-top:0}
   .steps li{border-top:1px solid var(--line);padding:30px 0 34px}
-  .track{padding:30px 24px;min-height:0}
-  .empty{min-height:240px}
-  .lyrics{min-height:7.2em}
   .btn{padding:17px 22px}
   .btn-sm{padding:10px 18px;font-size:14px}
   .card-actions .btn,.form .btn{width:100%}
@@ -321,12 +445,18 @@ footer nav a:hover{color:var(--gold)}
   .form input:not([type=radio]){font-size:21px}
   footer nav{margin-left:0;width:100%;order:2}
 }
+@media (max-width:560px){
+  .tiles{grid-template-columns:1fr}
+  .tile{min-height:340px}
+  .say{max-width:170px;font-size:13px;padding:8px 11px}
+}
 @media (max-width:420px){.top .brand span{display:none}}
-.hero>*,.gen-grid>*,.ads-head>*{min-width:0}
+.hero>*,.demo>*,.ads-head>*{min-width:0}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation:none!important;transition:none!important}
   .arch .l{stroke-dashoffset:0}
+  .sweeper{left:24px}
 }
 </style>
 </head>
@@ -342,8 +472,8 @@ footer nav a:hover{color:var(--gold)}
     <nav class="nav" aria-label="Bo'limlar">
       <a href="#raqamlar" data-i18n="nav_s">Raqamlar</a>
       <a href="#roliklar" data-i18n="nav_r">Roliklar</a>
-      <a href="#qoshiq" data-i18n="nav_g">Qo'shiq</a>
-      <a href="#reklama" data-i18n="ad">Reklama</a>
+      <a href="#sinab" data-i18n="d_e">Sinab ko'ring</a>
+      <a href="#sayt" data-i18n="nav_w">Sayt</a>
     </nav>
     <div class="lang" role="group" aria-label="Til / Язык">
       <button type="button" data-set-lang="uz" aria-pressed="true">UZ</button>
@@ -354,15 +484,16 @@ footer nav a:hover{color:var(--gold)}
 </header>
 
 <main>
-<div class="wrap">
-  <div class="hero">
+<div class="hero-wrap">
+  <div class="garland" aria-hidden="true"><svg viewBox="0 0 1000 110" preserveAspectRatio="none"><path d="M-10 8Q120 92 250 22T500 26T750 22T1010 8"/></svg></div>
+  <div class="wrap hero">
     <div class="copy">
       <p class="eyebrow in">Instagram · @aisketchuz</p>
       <h1><span class="l in" data-i18n="h1a">O'zbekcha hayot,</span> <em class="l in" data-i18n="h1b">AI multfilmida</em></h1>
-      <p class="lede in" data-tpl="hero">O'zbekiston hayotidan 3D sketchlar va ismga kulgili qo'shiqlar. Oxirgi 11&nbsp;kunda 3,5&nbsp;mln ko'rish&nbsp;— bu sahnada brendingizga ham joy bor.</p>
+      <p class="lede in" data-tpl="hero">O'zbekiston hayotidan 3D sketchlar va ismga kulgili qo'shiqlar. Oxirgi 30&nbsp;kunda 3,6&nbsp;mln ko'rish&nbsp;— bu sahnada brendingizga ham joy bor.</p>
       <div class="btns in">
         <a class="btn btn-solid" href="https://t.me/webfastuzb" target="_blank" rel="noopener" data-tg="hi"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg><span data-i18n="btn_ad">Reklama joylashtirish</span></a>
-        <a class="link" href="#qoshiq" data-i18n="btn_song">Ismimga qo'shiq</a>
+        <a class="link" href="#sayt" data-i18n="btn_site">Sizga ham shunday sayt</a>
       </div>
     </div>
     <div class="stage" id="stage">
@@ -379,20 +510,78 @@ footer nav a:hover{color:var(--gold)}
           <path class="l" pathLength="1" stroke-width=".3" stroke-opacity=".55" d="M50 7.5C75 18 95 37 95 63V154"/>
         </g>
       </svg>
-      <canvas id="logoCanvas" aria-label="ai sketch logotipi: doppi piksellarga aylanmoqda" role="img"></canvas>
-      <div class="hint"><i></i><span data-i18n="hint">Doppiga tegib ko'ring</span></div>
+      <i class="spot spot-l" aria-hidden="true"></i><i class="spot spot-r" aria-hidden="true"></i>
+      <a class="banner" href="#sinab"><span id="bannerText">Brendingiz shu yerda</span></a>
+      <div class="deck" aria-hidden="true"><i class="carpet"></i></div>
+      <button class="actor" type="button" data-who="kapibara" style="--x:12%;--b:23%;--h:47%;--z:1;--dp:.35;--lit:.8;--t:3.9s;--dl:-1.1s"><span class="say" aria-hidden="true"></span><span class="hit"></span><img src="assets/cast/full/kapibara.webp" alt="" width="366" height="489"></button>
+      <button class="actor" type="button" data-who="tovuq" style="--x:89%;--b:23%;--h:43%;--z:1;--dp:.35;--lit:.8;--t:3.3s;--dl:-2.3s"><span class="say" aria-hidden="true"></span><span class="hit"></span><img src="assets/cast/full/tovuq.webp" alt="" width="207" height="430"></button>
+      <button class="actor" type="button" data-who="ordak" style="--x:26%;--b:9%;--h:55%;--z:3;--dp:.8;--t:3.5s;--dl:-.6s"><span class="say" aria-hidden="true"></span><span class="hit"></span><img src="assets/cast/full/ordak.webp" alt="" width="349" height="494"></button>
+      <button class="actor" type="button" data-who="quyon" style="--x:77%;--b:7%;--h:66%;--z:3;--dp:.8;--t:3.7s;--dl:-1.7s"><span class="say" aria-hidden="true"></span><span class="hit"></span><img src="assets/cast/full/quyon.webp" alt="" width="314" height="776"></button>
+      <button class="actor" type="button" data-who="sher" style="--x:51%;--b:10%;--h:62%;--z:4;--dp:1;--t:3.4s"><span class="say" aria-hidden="true"></span><span class="hit"></span><img src="assets/cast/full/sher.webp" alt="" width="389" height="495"></button>
+      <p class="hint"><i></i><span data-i18n="hint">Qahramonlarni bosing</span></p>
     </div>
   </div>
+  <p class="sr" aria-live="polite" id="sayLive"></p>
 </div>
 
 <div class="orn" aria-hidden="true"></div>
-
 <div class="marq" aria-label="Qahramonlarimiz gaplari">
   <div class="row" id="row1"></div>
 </div>
 
-<section class="band" id="raqamlar">
+<section class="band" id="sinab">
   <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow" data-i18n="d_e">Sinab ko'ring</p>
+      <h2 data-i18n="d_h">Brendingizni sahnaga chiqaring</h2>
+      <p class="lead" data-i18n="d_p">Nomini yozing&nbsp;— qahramon shu zahoti u haqida kuylaydi. Haqiqiy rolik ham xuddi shunday bo'ladi, faqat 3D va ovozli.</p>
+    </div>
+    <div class="demo">
+      <div class="rv">
+        <div class="tabs" role="tablist">
+          <button type="button" role="tab" aria-selected="true" data-mode="brand" data-i18n="d_tb">Brend uchun</button>
+          <button type="button" role="tab" aria-selected="false" data-mode="name" data-i18n="d_tn">Ism uchun</button>
+        </div>
+        <label class="eyebrow" for="nameIn" id="nameLabel">Brend nomi</label>
+        <input id="nameIn" type="text" maxlength="24" autocomplete="off" spellcheck="false" placeholder="Shirin Choy">
+        <div class="quick" id="quick"><span data-i18n="g_ex">Masalan:</span></div>
+        <p class="eyebrow singers-label" data-i18n="d_singer">Vokalchi</p>
+        <div class="singers" id="singers"></div>
+        <div class="song-meta">
+          <p class="eyebrow" data-i18n="d_song">Qo'shiq</p>
+          <h3 id="sTitle"></h3>
+          <p class="by" id="sBy"></p>
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-solid" type="button" id="sendBtn"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg><span id="sendLabel">Shunday rolik buyurtma qilish</span></button>
+          <button class="btn btn-line" type="button" id="nextBtn" data-i18n="g_next">Boshqa qo'shiq</button>
+        </div>
+        <p class="status" id="status" role="status"></p>
+      </div>
+      <div class="phone rv" role="img" aria-label="Rolik namunasi">
+        <div class="screen">
+          <div class="garland" aria-hidden="true"><svg viewBox="0 0 1000 110" preserveAspectRatio="none"><path d="M-10 10Q250 100 500 22T1010 10"/></svg></div>
+          <i class="tick"><b id="tick"></b></i>
+          <i class="spot spot-l"></i><i class="spot spot-r"></i>
+          <div class="banner"><span id="phoneBanner">Shirin Choy</span></div>
+          <div class="deck"><i class="carpet"></i></div>
+          <img class="singer" id="phoneSinger" src="assets/cast/full/sher.webp" alt="" width="389" height="495">
+          <p class="subs" id="subs"></p>
+          <div class="ig-side" aria-hidden="true">
+            <span><svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.2C1 8.6 3 5 6.6 5c2 0 3.4 1.1 4.2 2.4h.4C12 6.1 13.4 5 15.4 5 19 5 21 8.6 19.6 11.8 17.5 16.4 12 21 12 21z"/></svg>48K</span>
+            <span><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.6 7.1L4 20l1-4.2A8 8 0 1 1 20 12z"/></svg>1,2K</span>
+            <span><svg viewBox="0 0 24 24"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>9K</span>
+          </div>
+          <div class="ig-foot"><b><img src="assets/icon.jpg" alt="" width="24" height="24">aisketchuz</b><span id="phoneAudio">♪ Asl audio</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="raqamlar">
+  <div class="wrap">
+    <div class="peek" aria-hidden="true"><span class="say" data-tpl="peek">Ko'rishlarning 99%&nbsp;— yangi odamlar!</span><img src="assets/cast/full/ordak.webp" alt="" width="349" height="494" loading="lazy"></div>
     <div class="sec-head rv">
       <p class="eyebrow" data-i18n="nav_s">Raqamlar</p>
       <h2 data-tpl="head">Roliklarni millionlab yangi odamlar ko'radi</h2>
@@ -401,29 +590,23 @@ footer nav a:hover{color:var(--gold)}
     <!-- Numbers come from assets/stats.js (renderStats); the values written here only show without JavaScript. -->
     <div class="stats">
       <div class="rv">
-        <p class="eyebrow" data-tpl="period">Oxirgi 11 kun</p>
+        <p class="eyebrow" data-tpl="period">Oxirgi 30 kun</p>
         <div class="kpis">
-          <div class="kpi"><b data-stat="views">3&nbsp;524&nbsp;527</b><p><span data-i18n="k1">ko'rish</span> · <span data-i18n="k1s">barcha roliklar</span></p></div>
-          <div class="kpi"><b data-stat="reach">1&nbsp;715&nbsp;331</b><p><span data-i18n="k2">tomoshabin</span> · <span data-i18n="k2s">noyob akkauntlar</span></p></div>
+          <div class="kpi"><b data-stat="views">3&nbsp;611&nbsp;559</b><p><span data-i18n="k1">ko'rish</span> · <span data-i18n="k1s">barcha roliklar</span></p></div>
+          <div class="kpi"><b data-stat="reach">1&nbsp;764&nbsp;403</b><p><span data-i18n="k2">tomoshabin</span> · <span data-i18n="k2s">noyob akkauntlar</span></p></div>
           <div class="kpi"><b data-stat="nf">99%</b><p><span data-i18n="k3">obuna bo'lmaganlar</span> · <span data-i18n="k3s">ko'rishlardagi ulushi</span></p></div>
         </div>
       </div>
       <figure class="rv">
         <figcaption class="eyebrow" data-i18n="s_top">Eng ko'p ko'rilgan 5 ta rolik</figcaption>
-        <ol class="bars" id="top5">
-          <li style="--v:1"><span class="rk" aria-hidden="true">1</span><span class="bl"><b>«Dilshod»</b><small>Ismga qo'shiq, 12-oktyabr</small></span><span class="bt"><i></i><em>529K</em></span></li>
-          <li style="--v:.817"><span class="rk" aria-hidden="true">2</span><span class="bl"><b>«Hojimurod»</b><small>Ismga qo'shiq, 11-oktyabr</small></span><span class="bt"><i></i><em>432K</em></span></li>
-          <li style="--v:.433"><span class="rk" aria-hidden="true">3</span><span class="bl"><b>Hayotiy sketch</b><small>7-oktyabr</small></span><span class="bt"><i></i><em>229K</em></span></li>
-          <li style="--v:.355"><span class="rk" aria-hidden="true">4</span><span class="bl"><b>«Firdavs»</b><small>Ismga qo'shiq, 12-oktyabr</small></span><span class="bt"><i></i><em>188K</em></span></li>
-          <li style="--v:.329"><span class="rk" aria-hidden="true">5</span><span class="bl"><b>Ismga qo'shiq</b><small>11-oktyabr</small></span><span class="bt"><i></i><em>174K</em></span></li>
-        </ol>
-        <p class="src" data-tpl="src">Manba: Instagram Insights, 2026-yil 18-oktyabr holatiga</p>
+        <ol class="bars" id="top5"></ol>
+        <p class="src" data-tpl="src">Manba: Instagram Insights</p>
       </figure>
     </div>
   </div>
 </section>
 
-<section id="roliklar">
+<section class="band" id="roliklar">
   <div class="wrap">
     <div class="sec-head rv">
       <p class="eyebrow" data-i18n="nav_r">Roliklar</p>
@@ -431,53 +614,13 @@ footer nav a:hover{color:var(--gold)}
       <p class="lead" data-i18n="r_p">Ikki format: 20–40 soniyalik hayotiy sketchlar va 10 soniyalik ismga qo'shiqlar. Qahramonlar&nbsp;— o'zimiz o'ylab topgan hayvonlar guruhi, Samarqand va Buxoro ruhida.</p>
     </div>
     <div class="reels rv">
-      <a class="reel" href="https://instagram.com/aisketchuz" target="_blank" rel="noopener" data-video="assets/video/dilshod" data-name="Dilshod"><span class="frame"><img src="assets/video/dilshod.webp" alt="Sher Registon yonidagi sahnada kuylaydi" width="540" height="960" loading="lazy" decoding="async"><svg class="rim" viewBox="0 0 100 178" preserveAspectRatio="none" aria-hidden="true"><path d="M5 173V58C5 38 24 22 50 8C76 22 95 38 95 58V173Z"/></svg><span class="views">529K <span class="sr">ko'rish</span></span></span><span class="cap"><em>Dilshod</em><small>0:10</small></span></a>
-      <a class="reel" href="https://instagram.com/aisketchuz" target="_blank" rel="noopener" data-video="assets/video/hojimurod" data-name="Hojimurod"><span class="frame"><img src="assets/video/hojimurod.webp" alt="Ko'zoynakli o'rdak bozorda kuylaydi" width="540" height="960" loading="lazy" decoding="async"><svg class="rim" viewBox="0 0 100 178" preserveAspectRatio="none" aria-hidden="true"><path d="M5 173V58C5 38 24 22 50 8C76 22 95 38 95 58V173Z"/></svg><span class="views">432K <span class="sr">ko'rish</span></span></span><span class="cap"><em>Hojimurod</em><small>0:10</small></span></a>
-      <a class="reel" href="https://instagram.com/aisketchuz" target="_blank" rel="noopener" data-video="assets/video/firdavs" data-name="Firdavs"><span class="frame"><img src="assets/video/firdavs.webp" alt="Smokingdagi quyon va supurgili tipratikan" width="540" height="960" loading="lazy" decoding="async"><svg class="rim" viewBox="0 0 100 178" preserveAspectRatio="none" aria-hidden="true"><path d="M5 173V58C5 38 24 22 50 8C76 22 95 38 95 58V173Z"/></svg><span class="views">188K <span class="sr">ko'rish</span></span></span><span class="cap"><em>Firdavs</em><small>0:10</small></span></a>
+      <a class="reel" href="https://instagram.com/aisketchuz" target="_blank" rel="noopener" data-video="assets/video/dilshod" data-name="Dilshod"><span class="frame"><img src="assets/video/dilshod.webp" alt="Sher Registon yonidagi sahnada kuylaydi" width="540" height="960" loading="lazy" decoding="async"><svg class="rim" viewBox="0 0 100 178" preserveAspectRatio="none" aria-hidden="true"><path d="M5 173V58C5 38 24 22 50 8C76 22 95 38 95 58V173Z"/></svg></span><span class="cap"><em>Dilshod</em><small>0:10</small></span></a>
+      <a class="reel" href="https://instagram.com/aisketchuz" target="_blank" rel="noopener" data-video="assets/video/hojimurod" data-name="Asilbek"><span class="frame"><img src="assets/video/hojimurod.webp" alt="Ko'zoynakli o'rdak bozorda kuylaydi" width="540" height="960" loading="lazy" decoding="async"><svg class="rim" viewBox="0 0 100 178" preserveAspectRatio="none" aria-hidden="true"><path d="M5 173V58C5 38 24 22 50 8C76 22 95 38 95 58V173Z"/></svg></span><span class="cap"><em>Asilbek</em><small>0:10</small></span></a>
+      <a class="reel" href="https://instagram.com/aisketchuz" target="_blank" rel="noopener" data-video="assets/video/firdavs" data-name="Firdavs"><span class="frame"><img src="assets/video/firdavs.webp" alt="Smokingdagi quyon va supurgili tipratikan" width="540" height="960" loading="lazy" decoding="async"><svg class="rim" viewBox="0 0 100 178" preserveAspectRatio="none" aria-hidden="true"><path d="M5 173V58C5 38 24 22 50 8C76 22 95 38 95 58V173Z"/></svg></span><span class="cap"><em>Firdavs</em><small>0:10</small></span></a>
       <a class="reel" href="https://instagram.com/aisketchuz" target="_blank" rel="noopener" data-video="assets/video/iqbol" data-name="Iqbol"><span class="frame"><img src="assets/video/iqbol.webp" alt="Kapibara va tovuq to'yda kuylaydi" width="540" height="960" loading="lazy" decoding="async"><svg class="rim" viewBox="0 0 100 178" preserveAspectRatio="none" aria-hidden="true"><path d="M5 173V58C5 38 24 22 50 8C76 22 95 38 95 58V173Z"/></svg></span><span class="cap"><em>Iqbol</em><small>0:10</small></span></a>
       <a class="reel" href="https://instagram.com/aisketchuz" target="_blank" rel="noopener" data-video="assets/video/ulugbek" data-name="Ulug'bek"><span class="frame"><img src="assets/video/ulugbek.webp" alt="Sher kechki bozorda kuylaydi" width="540" height="960" loading="lazy" decoding="async"><svg class="rim" viewBox="0 0 100 178" preserveAspectRatio="none" aria-hidden="true"><path d="M5 173V58C5 38 24 22 50 8C76 22 95 38 95 58V173Z"/></svg></span><span class="cap"><em>Ulug'bek</em><small>0:10</small></span></a>
     </div>
     <div class="reels-cta"><p data-i18n="r_hint">Bosing&nbsp;— ovozi bilan tomosha qiling</p><a class="link" href="https://instagram.com/aisketchuz" target="_blank" rel="noopener" data-i18n="r_btn">Hammasini Instagram'da ko'rish</a></div>
-  </div>
-</section>
-
-<section class="gen band" id="qoshiq">
-  <div class="wrap">
-    <div class="sec-head rv">
-      <p class="eyebrow" data-i18n="nav_g">Qo'shiq</p>
-      <h2 data-i18n="g_h">Ismingizni yozing&nbsp;— qo'shig'ingiz tayyor</h2>
-      <p class="lead" data-i18n="g_p">Sayt hoziroq qo'shiq boshlanishini, vokalchi va uslubni tanlaydi. Yoqsa, direktga yuboring&nbsp;— eng zo'rlari rolik bo'ladi.</p>
-    </div>
-    <div class="gen-grid">
-      <div class="rv">
-        <label class="eyebrow" for="nameIn" data-i18n="g_label">Kimning ismiga?</label>
-        <input id="nameIn" type="text" maxlength="20" autocomplete="off" spellcheck="false" placeholder="Sardor">
-        <div class="quick" id="quick">
-          <span data-i18n="g_ex">Masalan:</span>
-          <button type="button">Dilshod</button><button type="button">Sevara</button><button type="button">Jasur</button><button type="button">Malika</button><button type="button">Bobur</button>
-        </div>
-      </div>
-      <div class="track panel rv" id="card" aria-live="polite">
-        <div id="songEmpty" class="empty"><div><img src="assets/icon.jpg" alt="" width="66" height="88"><span data-i18n="g_empty">Ism yozilishi bilan bu yerda qo'shiq paydo bo'ladi.</span></div></div>
-        <div id="song" hidden>
-          <div class="now">
-            <img class="cover" id="cover" alt="" width="60" height="80">
-            <div>
-              <p class="eyebrow" data-i18n="nav_g">Qo'shiq</p>
-              <h3 id="sTitle"></h3>
-              <p class="by"><span id="cSinger"></span>&nbsp;· <span id="cStyle"></span></p>
-            </div>
-            <span class="dur">0:10</span>
-          </div>
-          <div class="lyrics" id="lyrics"></div>
-          <div class="card-actions">
-            <button class="btn btn-solid" type="button" id="sendBtn" data-i18n="g_send">Shu qo'shiqni so'rash</button>
-            <button class="btn btn-line" type="button" id="nextBtn" data-i18n="g_next">Boshqa variant</button>
-          </div>
-          <p class="status" id="status" role="status"></p>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -491,7 +634,7 @@ footer nav a:hover{color:var(--gold)}
         </div>
         <div>
           <p class="lead" data-i18n="a_p">Mahsulotingizni sketch ichiga hazil bilan joylashtiramiz: reklama emas, voqeaning bir qismi. Bunday roliklarni oxirigacha ko'rishadi va do'stlarga yuborishadi.</p>
-          <div class="btns"><a class="btn btn-solid" href="https://t.me/webfastuzb" target="_blank" rel="noopener" data-tg="hi"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg><span data-i18n="a_tg">Telegram'da yozish</span></a><a class="link" href="#brif" data-i18n="a_btn">Ariza qoldirish</a></div>
+          <div class="btns"><a class="btn btn-solid" href="https://t.me/webfastuzb" target="_blank" rel="noopener" data-tg="hi"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg><span data-i18n="a_tg">Telegram'da yozish</span></a><a class="link" href="#ariza" data-i18n="a_btn">Ariza qoldirish</a></div>
         </div>
       </div>
       <div class="story">
@@ -513,11 +656,10 @@ footer nav a:hover{color:var(--gold)}
       </div>
       <div class="own">
         <div class="cast" aria-hidden="true">
-          <img src="assets/cast/sher.webp" alt="" width="180" height="240" loading="lazy" decoding="async">
-          <img src="assets/cast/ordak.webp" alt="" width="180" height="240" loading="lazy" decoding="async">
-          <img src="assets/cast/quyon.webp" alt="" width="180" height="240" loading="lazy" decoding="async">
-          <img src="assets/cast/kapibara.webp" alt="" width="180" height="240" loading="lazy" decoding="async">
-          <img src="assets/cast/tovuq.webp" alt="" width="180" height="240" loading="lazy" decoding="async">
+          <img src="assets/cast/full/kapibara.webp" alt="" width="366" height="489" loading="lazy">
+          <img src="assets/cast/full/ordak.webp" alt="" width="349" height="494" loading="lazy">
+          <img src="assets/cast/full/sher.webp" alt="" width="389" height="495" loading="lazy">
+          <img src="assets/cast/full/tovuq.webp" alt="" width="207" height="430" loading="lazy">
         </div>
         <div>
           <p class="eyebrow" data-i18n="o_e">Alohida rolik</p>
@@ -530,17 +672,83 @@ footer nav a:hover{color:var(--gold)}
   </div>
 </section>
 
+<section class="band" id="sayt">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow" data-i18n="nav_w">Sayt</p>
+      <h2 data-i18n="w_h">Saytingiz ham jonlansin</h2>
+      <p class="lead" data-i18n="w_p">Bu saytni o'zimiz qildik. Brendingiz uchun ham xuddi shunday qilamiz: qahramonlar, animatsiya, o'zi yangilanadigan statistika va Telegram'ga arizalar.</p>
+    </div>
+    <div class="tiles rv">
+      <div class="tile">
+        <div class="area"><div class="doppi" id="doppi"><canvas role="img" aria-label="ai sketch logotipi: doppi piksellarga aylanmoqda"></canvas></div></div>
+        <h3 data-i18n="f1h">Jonli logotip</h3>
+        <p data-i18n="f1p">Logotipingiz harakatlanadi va tegishga javob beradi. Doppiga tegib ko'ring.</p>
+      </div>
+      <div class="tile">
+        <div class="area"><button class="actor" type="button" data-who="mascot" style="--t:3.6s"><span class="say" aria-hidden="true"></span><span class="hit"></span><img src="assets/cast/full/kapibara.webp" alt="" width="366" height="489" loading="lazy"></button></div>
+        <h3 data-i18n="f2h">Qahramon-maskot</h3>
+        <p data-i18n="f2p">Brendingiz qahramoni mijozlarni kutib oladi va gapiradi. Kapibarani bosing.</p>
+      </div>
+      <div class="tile">
+        <div class="area"><div class="live"><b data-stat="views">3&nbsp;611&nbsp;559</b><small><i></i><span data-tpl="fresh">Bugun yangilandi</span></small></div></div>
+        <h3 data-i18n="f3h">O'zi yangilanadi</h3>
+        <p data-i18n="f3p">Instagram raqamlari har kuni o'zi yangilanadi: qo'lda hech narsa o'zgartirmaysiz.</p>
+      </div>
+      <div class="tile">
+        <div class="area">
+          <div class="tgm" aria-hidden="true">
+            <i class="av"><svg viewBox="0 0 24 24"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></i>
+            <b><span data-i18n="tg_t">Yangi ariza</span><small data-i18n="tg_now">hozir</small></b>
+            <span data-i18n="tg_1">Brend: Shirin Choy</span>
+            <span data-i18n="tg_2">Xizmat: Sayt + reklama</span>
+          </div>
+        </div>
+        <h3 data-i18n="f4h">Arizalar Telegram'ga</h3>
+        <p data-i18n="f4p">Mijoz formani to'ldiradi&nbsp;— ariza darhol Telegram'ingizda.</p>
+      </div>
+    </div>
+    <div class="chips-row rv"><span data-i18n="ch1">O'zbek va rus tillari</span><span data-i18n="ch2">Telefonda ham chiroyli</span><span data-i18n="ch3">Tez yuklanadi</span></div>
+
+    <div class="packs rv">
+      <div class="pack">
+        <p class="eyebrow" data-i18n="p_e">Paket</p>
+        <h3 data-i18n="p1t">Reklama</h3>
+        <p class="sub" data-i18n="p1s">Brendingiz roliklarimizda</p>
+        <ul><li data-i18n="p1a">Syujet ichida, qo'shiq yoki seriya</li><li data-i18n="p1b">@aisketchuz auditoriyasi</li><li data-i18n="p1c">Statistika bilan hisobot</li></ul>
+        <a class="btn btn-line" href="https://t.me/webfastuzb" target="_blank" rel="noopener" data-tg="hi"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg><span data-i18n="p_btn">Narxini bilish</span></a>
+      </div>
+      <div class="pack">
+        <p class="eyebrow" data-i18n="p_e">Paket</p>
+        <h3 data-i18n="p2t">Sayt</h3>
+        <p class="sub" data-i18n="p2s">Shunday jonli sayt&nbsp;— sizga</p>
+        <ul><li data-i18n="p2a">Dizayn va animatsiya</li><li data-i18n="p2b">O'zbek va rus tillari</li><li data-i18n="p2c">Arizalar Telegram'ga</li></ul>
+        <a class="btn btn-line" href="https://t.me/webfastuzb" target="_blank" rel="noopener" data-tg="site"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg><span data-i18n="p_btn">Narxini bilish</span></a>
+      </div>
+      <div class="pack hot">
+        <span class="badge" data-i18n="p3badge">Eng foydali</span>
+        <p class="eyebrow" data-i18n="p_e">Paket</p>
+        <h3 data-i18n="p3t">Sayt + reklama</h3>
+        <p class="sub" data-i18n="p3s">Bitta qahramon&nbsp;— reklamada ham, saytda ham</p>
+        <ul><li data-i18n="p3a">Brendingiz uchun 3D qahramon</li><li data-i18n="p3b">U bilan rolik @aisketchuz'da</li><li data-i18n="p3c">Shu qahramonli sayt</li></ul>
+        <a class="btn btn-solid" href="https://t.me/webfastuzb" target="_blank" rel="noopener" data-tg="combo"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg><span data-i18n="p3btn">Paketni so'rash</span></a>
+      </div>
+    </div>
+    <p class="packs-note rv" data-i18n="p_note">Narx loyihaga qarab belgilanadi&nbsp;— Telegram'da yozing, g'oya bilan javob beramiz.</p>
+  </div>
+</section>
+
 <section id="jarayon">
   <div class="wrap">
     <div class="sec-head rv">
       <p class="eyebrow" data-i18n="j_e">Jarayon</p>
-      <h2 data-i18n="j_h">Arizadan e'longacha&nbsp;— to'rt qadam</h2>
+      <h2 data-i18n="j_h">Arizadan natijagacha&nbsp;— to'rt qadam</h2>
     </div>
     <ol class="steps rv">
-      <li><span class="sn" aria-hidden="true">01</span><h3 data-i18n="j1h">Brif</h3><p data-i18n="j1">Mahsulot, auditoriya va maqsad haqida qisqacha yozasiz.</p></li>
-      <li><span class="sn" aria-hidden="true">02</span><h3 data-i18n="j2h">G'oya va ssenariy</h3><p data-i18n="j2">Qahramonlar va hazilni tanlab, ssenariy yozamiz. Siz tasdiqlaysiz.</p></li>
-      <li><span class="sn" aria-hidden="true">03</span><h3 data-i18n="j3h">Rolik</h3><p data-i18n="j3">3D rolikni tayyorlaymiz va e'londan oldin sizga ko'rsatamiz.</p></li>
-      <li><span class="sn" aria-hidden="true">04</span><h3 data-i18n="j4h">E'lon va hisobot</h3><p data-i18n="j4">@aisketchuz sahifasida chiqaramiz va ko'rishlar statistikasini yuboramiz.</p></li>
+      <li><span class="sn" aria-hidden="true">01</span><h3 data-i18n="j1h">Brif</h3><p data-i18n="j1">Brendingiz va maqsadingiz haqida qisqacha yozasiz.</p></li>
+      <li><span class="sn" aria-hidden="true">02</span><h3 data-i18n="j2h">G'oya</h3><p data-i18n="j2">Qahramon, hazil va dizaynni taklif qilamiz. Siz tasdiqlaysiz.</p></li>
+      <li><span class="sn" aria-hidden="true">03</span><h3 data-i18n="j3h">Tayyorlash</h3><p data-i18n="j3">Rolik yoki saytni tayyorlab, chiqishdan oldin sizga ko'rsatamiz.</p></li>
+      <li><span class="sn" aria-hidden="true">04</span><h3 data-i18n="j4h">Ishga tushirish</h3><p data-i18n="j4">Rolikni e'lon qilamiz, saytni ishga tushiramiz va natijani ko'rsatamiz.</p></li>
     </ol>
   </div>
 </section>
@@ -554,16 +762,17 @@ footer nav a:hover{color:var(--gold)}
       <a class="link" href="https://t.me/webfastuzb" target="_blank" rel="noopener" data-tg="hi">@webfastuzb</a>
     </div>
     <div class="faq rv">
-      <details><summary data-i18n="q1">Reklama qancha turadi?</summary><p data-i18n="qa1">Narx formatga, rolik davomiyligiga va qismlar soniga bog'liq. Ariza qoldiring&nbsp;— g'oya va aniq narx bilan javob beramiz.</p></details>
+      <details><summary data-i18n="q1">Reklama va sayt qancha turadi?</summary><p data-i18n="qa1">Narx formatga, rolik davomiyligiga va sayt hajmiga bog'liq. Telegram'da yozing&nbsp;— g'oya va aniq narx bilan javob beramiz.</p></details>
       <details><summary data-i18n="q2">Tomoshabinlar reklamani o'tkazib yubormaydimi?</summary><p data-i18n="qa2">Mahsulot syujetning bir qismi: qahramonlar u bilan kulgili vaziyatga tushadi. Shuning uchun rolikni reklama emas, oddiy kontent kabi ko'rishadi.</p></details>
-      <details><summary data-i18n="q3">Ssenariyni oldindan ko'rsak bo'ladimi?</summary><p data-i18n="qa3">Ha. Ssenariyni ham, tayyor rolikni ham e'londan oldin siz tasdiqlaysiz.</p></details>
-      <details><summary data-i18n="q4">Natijani qanday bilamiz?</summary><p data-i18n="qa4">E'londan keyin rolikning Instagram statistikasini yuboramiz: ko'rishlar, qamrov, layklar va ulashishlar.</p></details>
-      <details><summary data-i18n="q5">Qaysi bizneslarga mos keladi?</summary><p data-i18n="qa5">Kundalik hayotda uchraydigan har qanday mahsulot: oziq-ovqat va ichimliklar, do'konlar, yetkazib berish, aloqa, banklar, ilovalar, o'quv markazlari. Mahsulot hayotga qanchalik yaqin bo'lsa, sketch shunchalik tabiiy chiqadi.</p></details>
+      <details><summary data-i18n="q3">Bizning qahramonimiz bo'lmasa-chi?</summary><p data-i18n="qa3">Brendingiz uchun yangi 3D qahramon o'ylab topamiz. U reklamada ham, saytda ham ishlaydi.</p></details>
+      <details><summary data-i18n="q4">Ssenariy va dizaynni oldindan ko'rsak bo'ladimi?</summary><p data-i18n="qa4">Ha. Ssenariyni, tayyor rolikni va sayt dizaynini chiqishdan oldin siz tasdiqlaysiz.</p></details>
+      <details><summary data-i18n="q5">Sayt qancha vaqtda tayyor bo'ladi?</summary><p data-i18n="qa5">Muddat sahifalar soni va animatsiyalarga bog'liq. Brifdan keyin aniq muddat va narxni aytamiz.</p></details>
+      <details><summary data-i18n="q6">Natijani qanday bilamiz?</summary><p data-i18n="qa6">E'londan keyin rolikning Instagram statistikasini yuboramiz: ko'rishlar, qamrov, layklar va ulashishlar.</p></details>
     </div>
   </div>
 </section>
 
-<section class="band" id="brif">
+<section class="band" id="ariza">
   <div class="wrap brief-grid">
     <div class="rv">
       <p class="eyebrow" data-i18n="b_e">Ariza</p>
@@ -575,24 +784,23 @@ footer nav a:hover{color:var(--gold)}
       </div>
     </div>
     <form class="form panel rv" id="brief" novalidate>
+      <fieldset class="field">
+        <legend class="eyebrow" data-i18n="b_need">Nima kerak?</legend>
+        <div class="chips">
+          <label><input type="radio" name="need" value="ad"><span data-i18n="c1">Reklama</span></label>
+          <label><input type="radio" name="need" value="site"><span data-i18n="c2">Sayt</span></label>
+          <label><input type="radio" name="need" value="combo"><span data-i18n="c3">Sayt + reklama</span></label>
+          <label><input type="radio" name="need" value="unsure" checked><span data-i18n="c4">Hali bilmayman</span></label>
+        </div>
+      </fieldset>
       <div class="field">
         <label class="eyebrow" for="bBrand" data-i18n="b_brand">Brend</label>
         <input id="bBrand" name="brand" type="text" maxlength="60" autocomplete="organization" required data-i18n-ph="b_brand_ph" placeholder="Kompaniya yoki brend nomi">
       </div>
       <div class="field">
-        <label class="eyebrow" for="bWhat" data-i18n="b_what">Nimani reklama qilamiz?</label>
+        <label class="eyebrow" for="bWhat" data-i18n="b_what">Mahsulot yoki xizmat</label>
         <input id="bWhat" name="what" type="text" maxlength="120" autocomplete="off" data-i18n-ph="b_what_ph" placeholder="Ichimlik, ilova, do'kon…">
       </div>
-      <fieldset class="field">
-        <legend class="eyebrow" data-i18n="b_fmt">Format</legend>
-        <div class="chips">
-          <label><input type="radio" name="fmt" value="plot"><span data-i18n="c1">Syujet ichida</span></label>
-          <label><input type="radio" name="fmt" value="song"><span data-i18n="c2">Brendga qo'shiq</span></label>
-          <label><input type="radio" name="fmt" value="series"><span data-i18n="c3">Seriya</span></label>
-          <label><input type="radio" name="fmt" value="own"><span data-i18n="c4">Alohida rolik</span></label>
-          <label><input type="radio" name="fmt" value="unsure" checked><span data-i18n="c5">Hali bilmayman</span></label>
-        </div>
-      </fieldset>
       <div class="field">
         <label class="eyebrow" for="bContact" data-i18n="b_contact">Aloqa</label>
         <input id="bContact" name="contact" type="text" maxlength="60" autocomplete="tel" required data-i18n-ph="b_contact_ph" placeholder="Telefon yoki Telegram">
@@ -608,6 +816,7 @@ footer nav a:hover{color:var(--gold)}
 </section>
 </main>
 
+<div class="lane" aria-hidden="true"><button class="sweeper" type="button" data-who="tipratikan" tabindex="-1"><span class="say"></span><span class="face"><img src="assets/cast/full/tipratikan.webp" alt="" width="229" height="392" loading="lazy"></span></button></div>
 <div class="orn" aria-hidden="true"></div>
 <div class="wrap">
   <footer>
@@ -616,6 +825,7 @@ footer nav a:hover{color:var(--gold)}
       <a href="https://instagram.com/aisketchuz" target="_blank" rel="noopener">Instagram</a>
       <a href="https://t.me/webfastuzb" target="_blank" rel="noopener" data-tg="hi">Telegram</a>
       <a href="#reklama" data-i18n="ad">Reklama</a>
+      <a href="#sayt" data-i18n="nav_w">Sayt</a>
     </nav>
     <span>© 2026 aisketch.uz</span>
   </footer>
@@ -634,7 +844,6 @@ footer nav a:hover{color:var(--gold)}
   <button class="v-x" type="button"><span aria-hidden="true">×</span><span class="sr" data-i18n="v_close">Yopish</span></button>
 </dialog>
 
-<script src="assets/logo-hero.js"></script>
 <script src="assets/stats.js"></script>
 <script>
 const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -645,19 +854,18 @@ Promise.race([document.fonts.ready,new Promise(r=>setTimeout(r,1500))]).then(()=
 
 /* ===== i18n ===== */
 const T={uz:{},ru:{
-  nav_r:"Ролики", nav_g:"Песня", nav_s:"Цифры", ad:"Реклама",
+  nav_r:"Ролики", nav_s:"Цифры", nav_w:"Сайт", ad:"Реклама",
   h1a:"Узбекская жизнь", h1b:"в AI-мультфильмах",
-  btn_ad:"Разместить рекламу", btn_song:"Песня на моё имя", hint:"Коснитесь тюбетейки",
+  btn_ad:"Разместить рекламу", btn_site:"Такой же сайт для вас", hint:"Нажмите на героев",
+  d_e:"Попробуйте", d_h:"Выведите свой бренд на сцену",
+  d_p:"Напишите название — герой сразу споёт о нём. Настоящий ролик будет таким же, только в 3D и с голосом.",
+  d_tb:"Для бренда", d_tn:"Для имени", g_ex:"Например:", d_singer:"Вокалист", d_song:"Песня", g_next:"Другая песня",
   s_p:"Instagram сам рекомендует наши ролики тем, кто на нас не подписан. Поэтому ваша реклама доходит до аудитории, которая вас ещё не знает.",
   k1:"просмотров", k1s:"все ролики", k2:"зрителей", k2s:"уникальные аккаунты", k3:"неподписчики", k3s:"доля в просмотрах",
   s_top:"5 самых просматриваемых роликов",
   r_h:"Базарная сцена, лев в тюбетейке и утка-вокалист",
   r_p:"Два формата: бытовые скетчи на 20–40 секунд и песни на имя по 10 секунд. Герои — придуманная нами звериная группа в духе Самарканда и Бухары.",
-  r_btn:"Смотреть всё в Instagram", r_hint:"Нажмите, чтобы смотреть со звуком", v_close:"Закрыть",
-  g_h:"Напишите имя — песня готова",
-  g_p:"Сайт сразу подберёт начало песни, вокалиста и стиль. Понравилось — отправьте в директ, лучшие станут роликами.",
-  g_label:"На чьё имя?", g_ex:"Например:", g_empty:"Как только вы напишете имя, здесь появится песня.",
-  g_send:"Заказать эту песню", g_next:"Другой вариант",
+  r_btn:"Смотреть всё в Instagram", r_hint:"Нажмите, чтобы смотреть со звуком", v_close:"Закрыть", v_open:"Открыть в Instagram",
   a_h:"Пусть ваш бренд станет героем мультфильма",
   a_p:"Встроим продукт в скетч с юмором: не реклама, а часть истории. Такие ролики досматривают и пересылают друзьям.",
   a_btn:"Оставить заявку", a_tg:"Написать в Telegram",
@@ -669,23 +877,37 @@ const T={uz:{},ru:{
   o_e:"Отдельный ролик", o_h:"3D-мультреклама для ваших страниц",
   o_p:"Наши герои в отдельном ролике о вашем бренде — для вашего Instagram, Telegram или YouTube. Сценарий, озвучка и монтаж — на нас.",
   o_btn:"Узнать цену",
-  j_e:"Как работаем", j_h:"От заявки до публикации — четыре шага",
-  j1h:"Бриф", j1:"Коротко рассказываете о продукте, аудитории и цели.",
-  j2h:"Идея и сценарий", j2:"Подбираем героев и шутку, пишем сценарий. Вы утверждаете.",
-  j3h:"Ролик", j3:"Делаем 3D-ролик и показываем его вам до публикации.",
-  j4h:"Публикация и отчёт", j4:"Выпускаем в @aisketchuz и присылаем статистику просмотров.",
+  w_h:"Пусть ваш сайт тоже оживёт",
+  w_p:"Этот сайт мы сделали сами. Для вашего бренда сделаем такой же: герои, анимация, статистика, которая обновляется сама, и заявки в Telegram.",
+  f1h:"Живой логотип", f1p:"Логотип двигается и отвечает на касания. Коснитесь тюбетейки.",
+  f2h:"Герой-маскот", f2p:"Герой вашего бренда встречает клиентов и разговаривает. Нажмите на капибару.",
+  f3h:"Обновляется сам", f3p:"Цифры из Instagram обновляются каждый день: руками ничего менять не нужно.",
+  f4h:"Заявки в Telegram", f4p:"Клиент заполняет форму — заявка сразу у вас в Telegram.",
+  tg_t:"Новая заявка", tg_now:"сейчас", tg_1:"Бренд: Shirin Choy", tg_2:"Услуга: сайт + реклама",
+  ch1:"Узбекский и русский", ch2:"Красиво и на телефоне", ch3:"Быстро загружается",
+  p_e:"Пакет", p1t:"Реклама", p1s:"Ваш бренд в наших роликах", p1a:"Внутри сюжета, песня или серия", p1b:"Аудитория @aisketchuz", p1c:"Отчёт со статистикой",
+  p2t:"Сайт", p2s:"Такой же живой сайт — для вас", p2a:"Дизайн и анимация", p2b:"Узбекский и русский", p2c:"Заявки в Telegram",
+  p3t:"Сайт + реклама", p3s:"Один герой — и в рекламе, и на сайте", p3a:"3D-герой для вашего бренда", p3b:"Ролик с ним в @aisketchuz", p3c:"Сайт с этим героем",
+  p3badge:"Выгоднее всего", p_btn:"Узнать цену", p3btn:"Запросить пакет",
+  p_note:"Цена зависит от проекта — напишите в Telegram, ответим с идеей.",
+  j_e:"Как работаем", j_h:"От заявки до результата — четыре шага",
+  j1h:"Бриф", j1:"Коротко рассказываете о бренде и цели.",
+  j2h:"Идея", j2:"Предлагаем героя, шутку и дизайн. Вы утверждаете.",
+  j3h:"Производство", j3:"Делаем ролик или сайт и показываем вам до запуска.",
+  j4h:"Запуск", j4:"Публикуем ролик, запускаем сайт и показываем результат.",
   q_e:"Вопросы", q_h:"Частые вопросы", q_more:"Если остались вопросы, напишите в Telegram.",
-  q1:"Сколько стоит реклама?", qa1:"Цена зависит от формата, длины ролика и количества серий. Оставьте заявку — ответим с идеей и точной ценой.",
+  q1:"Сколько стоят реклама и сайт?", qa1:"Цена зависит от формата, длины ролика и объёма сайта. Напишите в Telegram — ответим с идеей и точной ценой.",
   q2:"Не пролистают ли рекламу?", qa2:"Продукт — часть сюжета: герои попадают с ним в смешную ситуацию. Поэтому ролик смотрят как обычный контент, а не как рекламу.",
-  q3:"Можно увидеть сценарий заранее?", qa3:"Да. И сценарий, и готовый ролик вы утверждаете до публикации.",
-  q4:"Как узнать результат?", qa4:"После публикации присылаем статистику ролика из Instagram: просмотры, охват, лайки и репосты.",
-  q5:"Каким бизнесам подходит?", qa5:"Любому продукту из повседневной жизни: еда и напитки, магазины, доставка, связь, банки, приложения, учебные центры. Чем ближе продукт к жизни, тем естественнее получается скетч.",
+  q3:"А если у нас нет своего героя?", qa3:"Придумаем для бренда нового 3D-героя. Он будет работать и в рекламе, и на сайте.",
+  q4:"Можно увидеть сценарий и дизайн заранее?", qa4:"Да. Сценарий, готовый ролик и дизайн сайта вы утверждаете до публикации.",
+  q5:"Сколько времени делается сайт?", qa5:"Срок зависит от числа страниц и анимаций. После брифа назовём точный срок и цену.",
+  q6:"Как узнать результат?", qa6:"После публикации присылаем статистику ролика из Instagram: просмотры, охват, лайки и репосты.",
   b_e:"Заявка", b_h:"Расскажите о вашем бренде",
   b_p:"Четыре поля — и заявка будет готова в Telegram. Ответим с идеей и ценой.",
-  b_brand:"Бренд", b_brand_ph:"Название компании или бренда", b_what:"Что рекламируем?", b_what_ph:"Напиток, приложение, магазин…",
-  b_fmt:"Формат", c1:"Внутри сюжета", c2:"Песня о бренде", c3:"Серия", c4:"Отдельный ролик", c5:"Пока не знаю",
+  b_need:"Что нужно?", c1:"Реклама", c2:"Сайт", c3:"Сайт + реклама", c4:"Пока не знаю",
+  b_brand:"Бренд", b_brand_ph:"Название компании или бренда", b_what:"Продукт или услуга", b_what_ph:"Напиток, приложение, магазин…",
   b_contact:"Контакт", b_contact_ph:"Телефон или Telegram", b_send:"Отправить в Telegram", b_ig:"Через Instagram",
-  b_note:"В Telegram откроется готовый текст — останется нажать «Отправить».", v_open:"Открыть в Instagram"
+  b_note:"В Telegram откроется готовый текст — останется нажать «Отправить»."
 }};
 document.querySelectorAll("[data-i18n]").forEach(el=>T.uz[el.dataset.i18n]=el.textContent);
 document.querySelectorAll("[data-i18n-ph]").forEach(el=>T.uz[el.dataset.i18nPh]=el.placeholder);
@@ -695,9 +917,10 @@ function setLang(l){
   document.querySelectorAll("[data-i18n]").forEach(el=>{const v=T[l][el.dataset.i18n]; if(v) el.textContent=v;});
   document.querySelectorAll("[data-i18n-ph]").forEach(el=>{const v=T[l][el.dataset.i18nPh]; if(v) el.placeholder=v;});
   document.querySelectorAll("[data-set-lang]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.setLang===l));
-  renderSong(false);
   renderStats();
   setTg();
+  castNames();
+  renderDemo(false);
   try{localStorage.setItem("lang",l)}catch(e){}
 }
 document.querySelectorAll("[data-set-lang]").forEach(b=>b.onclick=()=>{
@@ -709,13 +932,15 @@ document.querySelectorAll("[data-set-lang]").forEach(b=>b.onclick=()=>{
 const STAT_T={
   uz:{hero:"O'zbekiston hayotidan 3D sketchlar va ismga kulgili qo'shiqlar. Oxirgi {days} kunda {views} ko'rish — bu sahnada brendingizga ham joy bor.",
     head:["Roliklarni millionlab yangi odamlar ko'radi","Roliklarni asosan yangi odamlar ko'radi"],
-    period:"Oxirgi {days} kun", src:"Manba: Instagram Insights, {date} holatiga",
+    period:"Oxirgi {days} kun", src:"Manba: Instagram Insights, {date} holatiga", peek:"Ko'rishlarning {nf} — yangi odamlar!",
+    fresh:["Bugun yangilandi","{date} yangilandi"],
     song:"Ismga qo'shiq", sketch:"Hayotiy sketch", views:"ko'rish", units:["mln","ming"],
     months:["yanvar","fevral","mart","aprel","may","iyun","iyul","avgust","sentyabr","oktyabr","noyabr","dekabr"],
     days:n=>n, day:(d,m)=>`${d}-${m}`, date:(y,m,d)=>`${y}-yil ${d}-${m}`},
   ru:{hero:"3D-скетчи из жизни Узбекистана и смешные песни на имя. {views} просмотров за последние {days} — на этой сцене есть место и вашему бренду.",
     head:["Ролики смотрят миллионы новых людей","Ролики смотрят в основном новые люди"],
-    period:"За последние {days}", src:"Источник: Instagram Insights, данные на {date}",
+    period:"За последние {days}", src:"Источник: Instagram Insights, данные на {date}", peek:"{nf} просмотров — новые люди!",
+    fresh:["Обновлено сегодня","Обновлено {date}"],
     song:"Песня на имя", sketch:"Бытовой скетч", views:"просмотров", units:["млн","тыс."],
     months:["января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"],
     days:n=>`${n} ${{one:"день",few:"дня"}[new Intl.PluralRules("ru").select(n)]||"дней"}`, day:(d,m)=>`${d} ${m}`, date:(y,m,d)=>`${d} ${m} ${y}`}
@@ -726,20 +951,24 @@ const grouped=n=>String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g," ");
 const compact=n=>n>=1e6?tenths(n/1e6)+"M":n>=1e3?Math.floor(n/1e3)+"K":String(n);
 const inWords=(n,u)=>n>=1e6?tenths(n/1e6)+" "+u[0]:n>=1e3?Math.floor(n/1e3)+" "+u[1]:grouped(n);
 const nameKey=s=>(s||"").toLowerCase().replace(/[ʻʼ‘’`]/g,"'");
+const today=()=>new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Tashkent",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
 function renderStats(){
   const S=window.STATS; if(!S)return;
   const t=STAT_T[lang],put=(sel,text)=>document.querySelectorAll(sel).forEach(el=>el.textContent=text);
   const ymd=iso=>{const [y,m,d]=iso.split("-").map(Number);return [y,t.months[m-1],d];};
-  const [uy,um,ud]=ymd(S.updated);
+  const [uy,um,ud]=ymd(S.updated),nf=Math.floor((S.nonFollowers||0)*100)+"%";
   put('[data-tpl="hero"]',t.hero.replace("{days}",t.days(S.days)).replace("{views}",inWords(S.views,t.units)));
   put('[data-tpl="head"]',t.head[S.reach>=1e6?0:1]);
   put('[data-tpl="period"]',t.period.replace("{days}",t.days(S.days)));
   put('[data-tpl="src"]',t.src.replace("{date}",t.date(uy,um,ud)));
+  put('[data-tpl="fresh"]',S.updated===today()?t.fresh[0]:t.fresh[1].replace("{date}",t.day(ud,um)));
+  put('[data-tpl="peek"]',t.peek.replace("{nf}",nf));
+  document.querySelector(".peek").hidden=S.nonFollowers==null;
   put('[data-stat="views"]',grouped(S.views));
   put('[data-stat="reach"]',grouped(S.reach));
-  const nf=document.querySelector('[data-stat="nf"]');
-  nf.closest(".kpi").hidden=S.nonFollowers==null;
-  nf.textContent=Math.floor((S.nonFollowers||0)*100)+"%";
+  const nfEl=document.querySelector('[data-stat="nf"]');
+  nfEl.closest(".kpi").hidden=S.nonFollowers==null;
+  nfEl.textContent=nf;
   const reels=[...S.reels].sort((a,b)=>b.views-a.views),max=reels[0]?.views||1;
   document.getElementById("top5").replaceChildren(...reels.slice(0,5).map((r,i)=>{
     const li=document.createElement("li"),[,m,d]=ymd(r.date);
@@ -772,65 +1001,64 @@ function renderStats(){
   addEventListener("scroll",f,{passive:true});f();
 })();
 
-/* ===== Hero: pixels gather into the doppi, seated inside the arch ===== */
+/* ===== String lights along each garland wire ===== */
+document.querySelectorAll(".garland").forEach(g=>{
+  const path=g.querySelector("path"),L=path.getTotalLength(),n=g.closest(".screen")?9:Math.round(innerWidth/42);
+  const colors=["#F2B441","#FFE3A0","#E8798F","#3CC8D0","#F2B441"];
+  for(let i=0;i<n;i++){
+    const p=path.getPointAtLength(L*(i+.5)/n),b=document.createElement("i");
+    b.className="bulb";
+    b.style.cssText=`left:${p.x/10}%;top:${p.y/110*100}%;--c:${colors[i%colors.length]};--tw:${2.4+Math.random()*2.4}s;--dl:${-Math.random()*4}s`;
+    g.append(b);
+  }
+});
+
+/* ===== The cast: idle on stage, follow the pointer a little, and talk when tapped ===== */
+const CAST={
+  sher:{name:["Sher","Лев"],uz:["Salom! Reklama kerakmi?","Brendingizni kuylab beraman!","{views} ko'rish — {days} kunda!"],ru:["Салют! Нужна реклама?","Спою про ваш бренд!","{views} просмотров за {days}!"]},
+  ordak:{name:["O'rdak","Утка"],uz:["Qimmat, aka!","Ko'zoynagimga logotipingizni yozamiz!"],ru:["Дорого, ака!","Нарисуем ваш логотип на моих очках!"]},
+  quyon:{name:["Quyon","Кролик"],uz:["Yo'ldaman!","Sahnada joy bor — siz uchun!"],ru:["Я в пути!","На сцене есть место — для вас!"]},
+  kapibara:{name:["Kapibara","Капибара"],uz:["Choy ichamiz!","Sayt kerakmi? Shunaqasini qilamiz!"],ru:["Пьём чай!","Нужен сайт? Сделаем такой же!"]},
+  tovuq:{name:["Tovuq","Курица"],uz:["Qachon uylanasan?","Brendingizni to'yga olib boraman!"],ru:["Когда женишься?","Возьму ваш бренд на свадьбу!"]},
+  mascot:{name:["Kapibara","Капибара"],uz:["Assalomu alaykum! Xush kelibsiz!","Men — saytingiz qahramoni!"],ru:["Здравствуйте! Добро пожаловать!","Я — герой вашего сайта!"]},
+  tipratikan:{name:["Tipratikan","Ёжик"],uz:["Supuraman, supuraman…","Oxirigacha o'qidingizmi? Rahmat!"],ru:["Подметаю, подметаю…","Дочитали до конца? Спасибо!"]}
+};
+function say(el,fromUser){
+  const c=CAST[el.dataset.who],pool=c[lang],S=window.STATS;
+  el._i=((el._i??Math.floor(Math.random()*pool.length))+1)%pool.length;
+  let line=pool[el._i];
+  if(line.includes("{views}")){
+    if(!S) line=pool[0];
+    else line=line.replace("{views}",inWords(S.views,STAT_T[lang].units)).replace("{days}",STAT_T[lang].days(S.days));
+  }
+  el.querySelector(".say").textContent=line;
+  el.classList.remove("hop");void el.offsetWidth;el.classList.add("talk","hop");
+  clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove("talk"),2800);
+  if(fromUser) document.getElementById("sayLive").textContent=`${c.name[lang==="ru"?1:0]}: ${line}`;
+}
+function castNames(){
+  document.querySelectorAll("[data-who]").forEach(el=>{
+    const n=CAST[el.dataset.who].name[lang==="ru"?1:0];
+    el.setAttribute("aria-label",lang==="ru"?`${n}: сказать фразу`:`${n}: gapirtirish`);
+  });
+}
+document.querySelectorAll("[data-who]").forEach(el=>el.addEventListener("click",()=>say(el,true)));
 (function(){
-  const stage=document.getElementById("stage"),cv=document.getElementById("logoCanvas"),ctx=cv.getContext("2d");
-  let W=0,H=0,parts=[],mouse={x:0,y:0,on:false},visible=true,box=null,imgA=0,started=false;
-  const img=new Image(); img.src=window.LOGO_SRC;
-  // Where the doppi's centre is inside the logo image, and where it sits in the stage (centre of the arch).
-  const DOPPI={x:.284,y:.51},SEAT={x:.34,y:.6},LOGO_W=.86;
-  function build(){
-    const r=stage.getBoundingClientRect(),dpr=Math.min(devicePixelRatio||1,2);
-    if(r.width<20||r.height<20){box=null;parts=[];return false;}
-    W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);ctx.imageSmoothingQuality="high";
-    const iw=img.naturalWidth,ih=img.naturalHeight,dw=W*LOGO_W,dh=dw*ih/iw,ox=W*SEAT.x-dw*DOPPI.x,oy=H*SEAT.y-dh*DOPPI.y;
-    box={ox,oy,dw,dh};
-    const lit=(d,i)=>(d[i]+d[i+1]+d[i+2])/3*d[i+3]/255>60;
-    const target=W<520?3800:7500;
-    const probe=document.createElement("canvas"),pw=200,ph=Math.round(200*ih/iw);probe.width=pw;probe.height=ph;
-    const pc=probe.getContext("2d");pc.drawImage(img,0,0,pw,ph);let cnt=0;const pd=pc.getImageData(0,0,pw,ph).data;
-    for(let i=0;i<pd.length;i+=4) if(lit(pd,i)) cnt++;
-    const sw=Math.max(60,Math.round(pw*Math.sqrt(target/Math.max(cnt,1)))),sh=Math.round(sw*ih/iw);
-    const off=document.createElement("canvas");off.width=sw;off.height=sh;const o=off.getContext("2d");o.drawImage(img,0,0,sw,sh);
-    const d=o.getImageData(0,0,sw,sh).data,cell=dw/sw;parts=[];
-    for(let y=0;y<sh;y++)for(let x=0;x<sw;x++){const i=(y*sw+x)*4,R=d[i],G=d[i+1],B=d[i+2];if(!lit(d,i))continue;
-      parts.push({hx:ox+x*cell,hy:oy+y*cell,x:W*.5+(Math.random()-.2)*W*1.2,y:H*.5+(Math.random()-.5)*H*1.2,vx:0,vy:0,col:`rgb(${R},${G},${B})`,neon:Math.max(R,G,B)-Math.min(R,G,B)>70,s:cell*1.02});}
-    imgA=0;return true;
+  const stage=document.getElementById("stage"),actors=[...stage.querySelectorAll(".actor")];
+  if(reduce)return;
+  if(matchMedia("(hover: hover)").matches){
+    stage.closest(".hero-wrap").addEventListener("pointermove",e=>{
+      const r=stage.getBoundingClientRect();
+      stage.style.setProperty("--mx",Math.max(-1,Math.min(1,((e.clientX-r.left)/r.width-.5)*2)).toFixed(3));
+      stage.style.setProperty("--my",Math.max(-1,Math.min(1,((e.clientY-r.top)/r.height-.5)*2)).toFixed(3));
+    });
   }
-  function frame(){
-    requestAnimationFrame(frame);
-    if(visible&&box){
-      ctx.clearRect(0,0,W,H);
-      const R=Math.max(70,W*.13),R2=R*R; let moving=0;
-      for(const p of parts){
-        p.vx+=(p.hx-p.x)*.05;p.vy+=(p.hy-p.y)*.05;
-        if(mouse.on){const dx=p.x-mouse.x,dy=p.y-mouse.y,d2=dx*dx+dy*dy;if(d2<R2){const dd=Math.sqrt(d2)||1,f=(1-dd/R)*8;p.vx+=dx/dd*f;p.vy+=dy/dd*f;}}
-        if(p.neon&&Math.random()<.001){p.vx+=3+Math.random()*7;p.vy+=(Math.random()-.5)*4;}
-        p.vx*=.83;p.vy*=.83;p.x+=p.vx;p.y+=p.vy;
-        if(!p.neon&&Math.abs(p.x-p.hx)+Math.abs(p.y-p.hy)>1.5) moving++;
-      }
-      const settled=moving<parts.length*.01;
-      imgA+=((settled?1:0)-imgA)*(settled?.06:.35);
-      const pa=1-imgA;
-      if(pa>.02){ctx.globalAlpha=pa;for(const p of parts){ctx.fillStyle=p.col;ctx.fillRect(p.x,p.y,p.s,p.s);}ctx.globalAlpha=1;}
-      if(imgA>.01){ctx.globalAlpha=imgA;ctx.drawImage(img,box.ox,box.oy,box.dw,box.dh);ctx.globalAlpha=1;
-        for(const p of parts){if(p.neon&&Math.abs(p.x-p.hx)>1.5){ctx.fillStyle=p.col;ctx.fillRect(p.x,p.y,p.s,p.s);}}}
-    }
-  }
-  function pos(e){const r=cv.getBoundingClientRect(),pt=e.touches?e.touches[0]:e;mouse.x=pt.clientX-r.left;mouse.y=pt.clientY-r.top;mouse.on=true;}
-  function explode(e){const r=cv.getBoundingClientRect(),cx=e.clientX-r.left,cy=e.clientY-r.top;
-    for(const p of parts){const dx=p.x-cx,dy=p.y-cy,dl=Math.hypot(dx,dy)||1,f=10+Math.random()*26;p.vx+=dx/dl*f;p.vy+=dy/dl*f;}}
-  const still=()=>{if(box){ctx.clearRect(0,0,W,H);ctx.drawImage(img,box.ox,box.oy,box.dw,box.dh);}};
-  img.onload=()=>{
-    if(build()) lastW=stage.getBoundingClientRect().width;
-    if(reduce){still();return;}
-    if(!started){started=true;requestAnimationFrame(frame);}
-    stage.addEventListener("pointermove",pos);stage.addEventListener("pointerleave",()=>mouse.on=false);
-    stage.addEventListener("touchmove",pos,{passive:true});stage.addEventListener("touchend",()=>mouse.on=false);
-    stage.addEventListener("click",explode);
-    new IntersectionObserver(es=>visible=es[0].isIntersecting).observe(stage);
-  };
-  let rt,lastW=0;new ResizeObserver(()=>{clearTimeout(rt);rt=setTimeout(()=>{const w=stage.getBoundingClientRect().width;if(!img.complete||!img.naturalWidth||Math.abs(w-lastW)<2)return;lastW=w;if(build()&&reduce)still();},120)}).observe(stage);
+  // Someone on stage speaks up every few seconds, but only while the stage is on screen.
+  let visible=true,k=0;
+  new IntersectionObserver(es=>visible=es[0].isIntersecting).observe(stage);
+  const order=["sher","quyon","ordak","tovuq","kapibara"].map(w=>actors.find(a=>a.dataset.who===w));
+  setTimeout(()=>say(order[0]),1400);
+  setInterval(()=>{if(visible&&!document.hidden) say(order[++k%order.length]);},4300);
 })();
 
 /* ===== Phrase marquee ===== */
@@ -907,7 +1135,9 @@ function renderStats(){
 const TG="https://t.me/webfastuzb";
 const TG_DRAFT={
   hi:{uz:"Salom! Reklama bo'yicha yozyapman (aisketch.uz)",ru:"Здравствуйте! Пишу по поводу рекламы (aisketch.uz)"},
-  own:{uz:"Salom! Brendimiz uchun alohida 3D rolik narxi qiziq (aisketch.uz)",ru:"Здравствуйте! Интересует цена отдельного 3D-ролика для нашего бренда (aisketch.uz)"}
+  own:{uz:"Salom! Brendimiz uchun alohida 3D rolik narxi qiziq (aisketch.uz)",ru:"Здравствуйте! Интересует цена отдельного 3D-ролика для нашего бренда (aisketch.uz)"},
+  site:{uz:"Salom! Bizga ham shunday jonli sayt kerak (aisketch.uz)",ru:"Здравствуйте! Нам нужен такой же живой сайт (aisketch.uz)"},
+  combo:{uz:"Salom! «Sayt + reklama» paketi qiziq (aisketch.uz)",ru:"Здравствуйте! Интересует пакет «Сайт + реклама» (aisketch.uz)"}
 };
 const tgLink=text=>`${TG}?text=${encodeURIComponent(text)}`;
 function setTg(){document.querySelectorAll("[data-tg]").forEach(a=>a.href=tgLink(TG_DRAFT[a.dataset.tg][lang]));}
@@ -933,7 +1163,7 @@ function toDirect(msg,el){
     :(lang==="ru"?"Напишите в директ:\n":"Direktga yozing:\n")+msg;
 }
 
-/* ===== Name song generator ===== */
+/* ===== Try it: a jingle for a brand (or a song for a name), shown as a reel on the phone ===== */
 const SONGS=[
   {uz:"«Yo'ldaman»",ru:"«Yo'ldaman»",l:N=>`${N}, ${N}, qayerdasan?\n«Yo'ldaman!» deysan, divandasan!\nChoy sovudi, mehmon ketdi,\n${N} hali ham «yo'ldaman!»`},
   {uz:"Bozorda",ru:"На базаре",l:N=>`${N}, ${N}, ketdi bozor,\nNarxni so'rab, bo'ldi bezor.\nSotuvchi dedi: «Arzon, ol, yor!»\n${N} qochdi: «Pulim yo'q, yor!»`},
@@ -943,45 +1173,172 @@ const SONGS=[
   {uz:"Wi‑Fi",ru:"Wi‑Fi",l:N=>`${N}ning uyida Wi‑Fi yo'q,\nQo'shnining paroli: «Yo'q, yo'q!»\nDevor oldida o'tirar,\n${N} internet qidirar!`},
   {uz:"Alo!",ru:"Алло!",l:N=>`Alo, alo, ${N}, qayerda?\n«Ishdaman!» deydi — to'yda!\nRaqsga tushdi, terladi,\n${N} yana «ishdaman!» dedi!`}
 ];
-// Vocalists are the channel's own characters; each has a portrait in assets/cast/, cut from the clips.
+const JINGLES=[
+  {uz:"Bozorda",ru:"На базаре",l:B=>`${B}, ${B} — bozorda shov-shuv!\nHamma so'raydi: «Qani, bizga ham!»\nSotuvchi kuladi: «Navbatga turing!»\n${B} — bugun hamma tilida!`},
+  {uz:"To'yda",ru:"На свадьбе",l:B=>`To'yda karnay, to'yda surnay,\nMehmonlar so'raydi: «${B} qani?»\nOshdan keyin, raqsdan oldin —\n${B} bilan to'y yanada zo'r!`},
+  {uz:"«Yo'ldaman»",ru:"«Yo'ldaman»",l:B=>`«Yo'ldaman!» deydi do'stim — yana kechikdi,\nLekin ${B} olib keldi — hammasi kechirildi!\nChoy ham tayyor, gap ham ko'p,\n${B} bo'lsa — kayfiyat zo'r!`},
+  {uz:"Tirbandlik",ru:"Пробка",l:B=>`Tirbandlikda turibman, soat sakkiz,\nRadioda yana o'sha qo'shiq — ${B}!\nHaydovchilar qo'shilib kuylaydi:\n«${B}, ${B} — butun shahar biladi!»`},
+  {uz:"Oylik",ru:"Зарплата",l:B=>`Oylik tushdi — birinchi ish:\n${B}ga borish, keyin dam olish!\nOyim so'raydi: «Pul qayoqqa ketdi?»\nMen kulaman: «${B}ga, oyijon!»`}
+];
+// Vocalists are the channel's own characters, cut out of the clips into assets/cast/full/.
 const SINGERS=[["sher","Sher","Лев"],["ordak","O'rdak","Утка"],["quyon","Quyon","Кролик"],["kapibara","Kapibara","Капибара"],["tovuq","Tovuq","Курица"]];
 const STYLES=[["Doira pop-folk","Поп-фолк с дойрой"],["Xorazm lazgi","Хорезмская лазги"],["Phonk","Phonk"],["Disko 80-lar","Диско 80-х"],["Reggeton","Реггетон"],["To'y remiksi, karnay-surnay","Свадебный ремикс с карнаем"],["Sving, krooner","Свинг-кроунер"],["8-bit","8-бит"],["Rok-n-roll","Рок-н-ролл"],["Amapiano","Амапиано"]];
-const nameIn=document.getElementById("nameIn"),card=document.getElementById("card");
-let offset=0,current=null,typeT=null,lastKey="";
+const DEMO_T={
+  uz:{brand:{label:"Brend nomi",ph:"Shirin Choy",send:"Shunday rolik buyurtma qilish",ex:["Shirin Choy","Tez Taksi","Baraka Market","Oltin Non"]},
+      name:{label:"Kimning ismiga?",ph:"Sardor",send:"Shu qo'shiqni so'rash",ex:["Dilshod","Sevara","Jasur","Malika","Bobur"]},
+      vocal:"Vokal",audio:"Asl audio",banner:"Brendingiz shu yerda",empty:"Avval nomni yozing.",sent:"Telegram ochildi, matn tayyor — «Yuborish»ni bosing."},
+  ru:{brand:{label:"Название бренда",ph:"Shirin Choy",send:"Заказать такой ролик",ex:["Shirin Choy","Tez Taksi","Baraka Market","Oltin Non"]},
+      name:{label:"На чьё имя?",ph:"Sardor",send:"Заказать эту песню",ex:["Dilshod","Sevara","Jasur","Malika","Bobur"]},
+      vocal:"Вокал",audio:"Оригинальный звук",banner:"Здесь ваш бренд",empty:"Сначала напишите название.",sent:"Открыли Telegram с готовым текстом — нажмите «Отправить»."}
+};
+const nameIn=document.getElementById("nameIn");
+let mode="brand",offset=0,pick=null,current=null,subT=null,lastKey="",heroBrand="";
+try{heroBrand=localStorage.getItem("brand")||""}catch(e){}
 const hash=s=>{let h=2166136261;for(const ch of s.toLowerCase()){h^=ch.codePointAt(0);h=Math.imul(h,16777619)}return h>>>0};
-const cleanName=v=>{v=v.replace(/[^A-Za-zА-Яа-яЁёЎўҚқҒғҲҳ'ʻʼ‘’ -]/g,"").trim();return v?v.charAt(0).toUpperCase()+v.slice(1):""};
+const cleanName=v=>{v=v.replace(mode==="brand"?/[^\p{L}\p{N}'ʻʼ‘’&.\- ]/gu:/[^\p{L}'ʻʼ‘’ -]/gu,"").replace(/\s+/g," ").trim();return v?v.charAt(0).toUpperCase()+v.slice(1):""};
 const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-function typeLyrics(N,text,animate){
-  const el=document.getElementById("lyrics");clearInterval(typeT);
-  // The untyped rest is laid out but hidden, so the card is already at its final height while typing.
-  const nm=esc(N),paint=(t,rest="")=>{el.innerHTML=esc(t).split(nm).join(`<span class="nm">${nm}</span>`)+(rest&&`<span class="ghost">${esc(rest)}</span>`);};
-  text=text.replace(/ — /g," — ");
-  if(!animate||reduce){paint(text);return;}
-  let i=0;typeT=setInterval(()=>{i+=2;paint(text.slice(0,i),text.slice(i));if(i>=text.length)clearInterval(typeT);},18);
+function karaoke(N,text){
+  const el=document.getElementById("subs"),bar=document.getElementById("tick"),lines=text.split("\n"),nm=esc(N);
+  const paint=t=>{el.innerHTML=esc(t).split(nm).join(`<span class="nm">${nm}</span>`);};
+  clearInterval(subT);
+  if(reduce){paint(lines.slice(0,2).join("\n"));bar.style.width="100%";return;}
+  let i=0;const step=()=>{paint(lines[i%lines.length]);bar.style.transition="none";bar.style.width=`${(i%lines.length)/lines.length*100}%`;
+    requestAnimationFrame(()=>{bar.style.transition="width 2.2s linear";bar.style.width=`${(i%lines.length+1)/lines.length*100}%`;});i++;};
+  step();subT=setInterval(step,2200);
 }
-function renderSong(animate=true){
-  const N=cleanName(nameIn.value),empty=document.getElementById("songEmpty"),box=document.getElementById("song");
-  if(!N){empty.hidden=false;box.hidden=true;current=null;lastKey="";return;}
-  empty.hidden=true;box.hidden=false;
-  const h=(hash(N)+offset*2654435761)>>>0;
-  const s=SONGS[h%SONGS.length],g=SINGERS[(h>>>3)%SINGERS.length],st=STYLES[(h>>>7)%STYLES.length];
-  const key=N+"|"+offset,changed=key!==lastKey;lastKey=key;
-  current={N,s,g,st};
-  const cover=document.getElementById("cover"),who=lang==="ru"?g[2]:g[1];
-  cover.src=`assets/cast/${g[0]}.webp`;cover.alt=who;
-  document.getElementById("cSinger").textContent=`${lang==="ru"?"Вокал":"Vokal"}: ${who}`;
-  document.getElementById("cStyle").textContent=lang==="ru"?st[1]:st[0];
+function renderDemo(animate=true){
+  const t=DEMO_T[lang],m=t[mode],typed=cleanName(nameIn.value),N=typed||m.ph;
+  document.getElementById("nameLabel").textContent=m.label;
+  nameIn.placeholder=m.ph;
+  document.getElementById("sendLabel").textContent=m.send;
+  const h=(hash(N)+offset*2654435761)>>>0,list=mode==="brand"?JINGLES:SONGS;
+  const s=list[h%list.length],g=pick||SINGERS[(h>>>3)%SINGERS.length],st=STYLES[(h>>>7)%STYLES.length];
+  const key=[mode,N,offset,g[0]].join("|"),changed=key!==lastKey;lastKey=key;
+  current={N,typed,s,g,st};
+  const singer=document.getElementById("phoneSinger");
+  if(!singer.src.endsWith(`/${g[0]}.webp`)){singer.src=`assets/cast/full/${g[0]}.webp`;singer.classList.remove("hop");void singer.offsetWidth;singer.classList.add("hop");}
+  document.getElementById("phoneBanner").textContent=N;
+  document.getElementById("phoneAudio").textContent=`♪ ${t.audio} · ${lang==="ru"?st[1]:st[0]}`;
   document.getElementById("sTitle").textContent=s[lang];
-  typeLyrics(N,s.l(N),animate&&changed);
+  document.getElementById("sBy").textContent=`${t.vocal}: ${lang==="ru"?g[2]:g[1]} · ${lang==="ru"?st[1]:st[0]}`;
+  document.querySelectorAll("#singers button").forEach(b=>{b.setAttribute("aria-pressed",b.dataset.s===g[0]);b.lastChild.textContent=SINGERS.find(x=>x[0]===b.dataset.s)[lang==="ru"?2:1];});
+  const quick=document.getElementById("quick");
+  if(quick.dataset.mode!==mode){
+    quick.dataset.mode=mode;
+    quick.replaceChildren(quick.firstElementChild,...m.ex.map(x=>Object.assign(document.createElement("button"),{type:"button",textContent:x,onclick:()=>{nameIn.value=x;offset=0;onType();}})));
+  }
+  // The banner over the main stage carries the visitor's brand too, and remembers it for the next visit.
+  document.getElementById("bannerText").textContent=heroBrand||t.banner;
+  if(animate&&changed||!subT) karaoke(N,s.l(N));
   document.getElementById("status").textContent="";
 }
-let deb;
-nameIn.addEventListener("input",()=>{offset=0;clearTimeout(deb);deb=setTimeout(()=>renderSong(true),220);});
-document.getElementById("nextBtn").onclick=()=>{offset++;renderSong(true);};
-document.querySelectorAll("#quick button").forEach(b=>b.onclick=()=>{nameIn.value=b.textContent;offset=0;renderSong(true);});
-document.getElementById("sendBtn").onclick=()=>{
-  if(current) toDirect(`Salom! ${current.N} ismiga qo'shiq kerak 🎵 (${current.s.uz}, ${current.g[1]}, ${current.st[0]})`,document.getElementById("status"));
-};
+function onType(){
+  if(mode==="brand"){
+    heroBrand=cleanName(nameIn.value);
+    try{heroBrand?localStorage.setItem("brand",heroBrand):localStorage.removeItem("brand")}catch(e){}
+  }
+  renderDemo(true);
+}
+(function(){
+  const box=document.getElementById("singers");
+  SINGERS.forEach(([id])=>{
+    const b=Object.assign(document.createElement("button"),{type:"button"});
+    b.dataset.s=id;
+    b.append(Object.assign(document.createElement("img"),{src:`assets/cast/full/${id}.webp`,alt:"",loading:"lazy"}),document.createTextNode(""));
+    b.onclick=()=>{pick=SINGERS.find(x=>x[0]===id);renderDemo(true);};
+    box.append(b);
+  });
+  document.querySelectorAll("[data-mode]").forEach(tab=>tab.onclick=()=>{
+    if(tab.dataset.mode===mode)return;
+    mode=tab.dataset.mode;offset=0;nameIn.value="";
+    document.querySelectorAll("[data-mode]").forEach(x=>x.setAttribute("aria-selected",x===tab));
+    renderDemo(true);
+  });
+  let deb;
+  nameIn.addEventListener("input",()=>{offset=0;clearTimeout(deb);deb=setTimeout(onType,200);});
+  document.getElementById("nextBtn").onclick=()=>{offset++;pick=null;renderDemo(true);};
+  document.getElementById("sendBtn").onclick=()=>{
+    const st=document.getElementById("status"),t=DEMO_T[lang],c=current;
+    st.classList.remove("err");
+    if(!c.typed){st.classList.add("err");st.textContent=t.empty;nameIn.focus();return;}
+    if(mode==="name"){toDirect(`Salom! ${c.N} ismiga qo'shiq kerak 🎵 (${c.s.uz}, ${c.g[1]}, ${c.st[0]})`,st);return;}
+    const msg=lang==="ru"
+      ?`Здравствуйте! Нужна песня о бренде «${c.N}» 🎵\nПесня: ${c.s.ru}\nВокал: ${c.g[2]}\nСтиль: ${c.st[1]}\n(aisketch.uz)`
+      :`Salom! «${c.N}» uchun brend qo'shig'i kerak 🎵\nQo'shiq: ${c.s.uz}\nVokal: ${c.g[1]}\nUslub: ${c.st[0]}\n(aisketch.uz)`;
+    copyText(msg);openChat(tgLink(msg));st.textContent=t.sent;
+  };
+})();
+
+/* ===== Live logo (websites section): pixels gather into the doppi; its 300 KB image loads only when the section comes near ===== */
+function doppi(stage){
+  const cv=stage.querySelector("canvas"),ctx=cv.getContext("2d");
+  let W=0,H=0,parts=[],mouse={x:0,y:0,on:false},visible=true,box=null,imgA=0,lastW=0;
+  const img=new Image(); img.src=window.LOGO_SRC;
+  // Where the doppi's centre is inside the logo image, and where it sits in the tile.
+  const DOPPI={x:.284,y:.51},SEAT={x:.36,y:.56},LOGO_W=1.18;
+  function build(){
+    const r=stage.getBoundingClientRect(),dpr=Math.min(devicePixelRatio||1,2);
+    if(r.width<20||r.height<20){box=null;parts=[];return false;}
+    W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);ctx.imageSmoothingQuality="high";
+    const iw=img.naturalWidth,ih=img.naturalHeight,dw=W*LOGO_W,dh=dw*ih/iw,ox=W*SEAT.x-dw*DOPPI.x,oy=H*SEAT.y-dh*DOPPI.y;
+    box={ox,oy,dw,dh};
+    const lit=(d,i)=>(d[i]+d[i+1]+d[i+2])/3*d[i+3]/255>60;
+    const target=W<300?2600:4200;
+    const probe=document.createElement("canvas"),pw=200,ph=Math.round(200*ih/iw);probe.width=pw;probe.height=ph;
+    const pc=probe.getContext("2d");pc.drawImage(img,0,0,pw,ph);let cnt=0;const pd=pc.getImageData(0,0,pw,ph).data;
+    for(let i=0;i<pd.length;i+=4) if(lit(pd,i)) cnt++;
+    const sw=Math.max(60,Math.round(pw*Math.sqrt(target/Math.max(cnt,1)))),sh=Math.round(sw*ih/iw);
+    const off=document.createElement("canvas");off.width=sw;off.height=sh;const o=off.getContext("2d");o.drawImage(img,0,0,sw,sh);
+    const d=o.getImageData(0,0,sw,sh).data,cell=dw/sw;parts=[];
+    for(let y=0;y<sh;y++)for(let x=0;x<sw;x++){const i=(y*sw+x)*4,R=d[i],G=d[i+1],B=d[i+2];if(!lit(d,i))continue;
+      parts.push({hx:ox+x*cell,hy:oy+y*cell,x:W*.5+(Math.random()-.2)*W*1.2,y:H*.5+(Math.random()-.5)*H*1.2,vx:0,vy:0,col:`rgb(${R},${G},${B})`,neon:Math.max(R,G,B)-Math.min(R,G,B)>70,s:cell*1.02});}
+    imgA=0;return true;
+  }
+  function frame(){
+    requestAnimationFrame(frame);
+    if(!visible||!box)return;
+    ctx.clearRect(0,0,W,H);
+    const R=Math.max(50,W*.16),R2=R*R; let moving=0;
+    for(const p of parts){
+      p.vx+=(p.hx-p.x)*.05;p.vy+=(p.hy-p.y)*.05;
+      if(mouse.on){const dx=p.x-mouse.x,dy=p.y-mouse.y,d2=dx*dx+dy*dy;if(d2<R2){const dd=Math.sqrt(d2)||1,f=(1-dd/R)*8;p.vx+=dx/dd*f;p.vy+=dy/dd*f;}}
+      if(p.neon&&Math.random()<.001){p.vx+=3+Math.random()*7;p.vy+=(Math.random()-.5)*4;}
+      p.vx*=.83;p.vy*=.83;p.x+=p.vx;p.y+=p.vy;
+      if(!p.neon&&Math.abs(p.x-p.hx)+Math.abs(p.y-p.hy)>1.5) moving++;
+    }
+    const settled=moving<parts.length*.01;
+    imgA+=((settled?1:0)-imgA)*(settled?.06:.35);
+    const pa=1-imgA;
+    if(pa>.02){ctx.globalAlpha=pa;for(const p of parts){ctx.fillStyle=p.col;ctx.fillRect(p.x,p.y,p.s,p.s);}ctx.globalAlpha=1;}
+    if(imgA>.01){ctx.globalAlpha=imgA;ctx.drawImage(img,box.ox,box.oy,box.dw,box.dh);ctx.globalAlpha=1;
+      for(const p of parts){if(p.neon&&Math.abs(p.x-p.hx)>1.5){ctx.fillStyle=p.col;ctx.fillRect(p.x,p.y,p.s,p.s);}}}
+  }
+  function pos(e){const r=cv.getBoundingClientRect(),pt=e.touches?e.touches[0]:e;mouse.x=pt.clientX-r.left;mouse.y=pt.clientY-r.top;mouse.on=true;}
+  function explode(e){const r=cv.getBoundingClientRect(),cx=e.clientX-r.left,cy=e.clientY-r.top;
+    for(const p of parts){const dx=p.x-cx,dy=p.y-cy,dl=Math.hypot(dx,dy)||1,f=10+Math.random()*26;p.vx+=dx/dl*f;p.vy+=dy/dl*f;}}
+  const still=()=>{if(box){ctx.clearRect(0,0,W,H);ctx.drawImage(img,box.ox,box.oy,box.dw,box.dh);}};
+  img.onload=()=>{
+    if(build()) lastW=stage.getBoundingClientRect().width;
+    if(reduce){still();return;}
+    requestAnimationFrame(frame);
+    stage.addEventListener("pointermove",pos);stage.addEventListener("pointerleave",()=>mouse.on=false);
+    stage.addEventListener("touchmove",pos,{passive:true});stage.addEventListener("touchend",()=>mouse.on=false);
+    stage.addEventListener("click",explode);
+    new IntersectionObserver(es=>visible=es[0].isIntersecting).observe(stage);
+  };
+  let rt;new ResizeObserver(()=>{clearTimeout(rt);rt=setTimeout(()=>{const w=stage.getBoundingClientRect().width;if(!img.complete||!img.naturalWidth||Math.abs(w-lastW)<2)return;lastW=w;if(build()&&reduce)still();},120)}).observe(stage);
+}
+(function(){
+  const box=document.getElementById("doppi");
+  const io=new IntersectionObserver(es=>{
+    if(!es[0].isIntersecting)return;
+    io.disconnect();
+    const s=Object.assign(document.createElement("script"),{src:"assets/logo-hero.js"});
+    s.onload=()=>doppi(box);
+    document.head.append(s);
+  },{rootMargin:"600px"});
+  io.observe(box);
+})();
 
 /* ===== Ad brief: brand and contact are required, the rest helps us answer with a price ===== */
 (function(){
@@ -997,22 +1354,31 @@ document.getElementById("sendBtn").onclick=()=>{
       st.textContent=ru?"Укажите бренд и контакт: телефон или Telegram.":"Brend nomi va aloqa uchun telefon yoki Telegram yozing.";
       form.elements[miss[0]].focus();return null;
     }
-    const fmt=form.querySelector("input[name=fmt]:checked+span").textContent;
-    const L=ru?["Здравствуйте! Заявка на рекламу","Бренд","Продукт","Формат","Контакт"]:["Salom! Reklama bo'yicha ariza","Brend","Mahsulot","Format","Aloqa"];
-    return [L[0]+" 📩",`${L[1]}: ${val("brand")}`,val("what")&&`${L[2]}: ${val("what")}`,`${L[3]}: ${fmt}`,`${L[4]}: ${val("contact")}`].filter(Boolean).join("\n");
+    const need=form.querySelector("input[name=need]:checked+span").textContent;
+    const L=ru?["Здравствуйте! Заявка с aisketch.uz","Нужно","Бренд","Продукт","Контакт"]:["Salom! aisketch.uz'dan ariza","Kerak","Brend","Mahsulot","Aloqa"];
+    return [L[0]+" 📩",`${L[1]}: ${need}`,`${L[2]}: ${val("brand")}`,val("what")&&`${L[3]}: ${val("what")}`,`${L[4]}: ${val("contact")}`].filter(Boolean).join("\n");
   }
   form.addEventListener("submit",e=>{
     e.preventDefault();
     const msg=brief(); if(!msg)return;
     copyText(msg); // a backup, in case Telegram drops the draft
     openChat(tgLink(msg));
-    st.textContent=lang==="ru"?"Открыли Telegram с готовым текстом — нажмите «Отправить».":"Telegram ochildi, matn tayyor — «Yuborish»ni bosing.";
+    st.textContent=DEMO_T[lang].sent;
   });
   document.getElementById("bIg").addEventListener("click",()=>{const msg=brief(); if(msg) toDirect(msg,st);});
 })();
 
+/* ===== The numbers' duck slides in when its section arrives ===== */
+(function(){
+  const peek=document.querySelector(".peek");
+  const io=new IntersectionObserver(es=>{if(es[0].isIntersecting){peek.classList.add("seen");io.disconnect();}},{threshold:.4});
+  io.observe(document.getElementById("raqamlar"));
+})();
+
 renderStats();
 setTg();
+castNames();
+renderDemo(false);
 try{const sv=localStorage.getItem("lang");if(sv==="ru"||(!sv&&/^ru/i.test(navigator.language)))setLang("ru");}catch(e){}
 </script>
 </body>
