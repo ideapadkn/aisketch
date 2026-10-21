@@ -1,2 +1,5 @@
 # Top reels downloaded from Instagram by scripts/update-stats.mjs during deploys
 assets/top/
+
+# Source renders of the cast (large JPGs); the site uses the WebP cutouts in assets/cast/full/
+assets/cast/src/
